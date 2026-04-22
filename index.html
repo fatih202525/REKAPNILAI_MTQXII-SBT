@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -664,6 +665,14 @@
             <option value="">Semua Golongan</option>
           </select>
         </div>
+        <div class="form-group">
+          <label>Nomor Peserta</label>
+          <select id="filterNomorRekap" onchange="renderRekap()">
+            <option value="">Semua Nomor</option>
+            <option value="ganjil">Nomor Ganjil</option>
+            <option value="genap">Nomor Genap</option>
+          </select>
+        </div>
         <div style="display:flex;gap:10px;align-items:flex-end">
           <button class="btn btn-success" onclick="exportExcelRekap()">📥 Unduh Excel</button>
           <button class="btn btn-gold" onclick="renderRekap()">🔄 Refresh</button>
@@ -698,6 +707,14 @@
           <label>Filter Golongan</label>
           <select id="filterGolonganAkhir" onchange="renderRekapAkhir()">
             <option value="">Semua Golongan</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Nomor Peserta</label>
+          <select id="filterNomorAkhir" onchange="renderRekapAkhir()">
+            <option value="">Semua Nomor</option>
+            <option value="ganjil">Nomor Ganjil</option>
+            <option value="genap">Nomor Genap</option>
           </select>
         </div>
         <div style="display:flex;gap:10px;align-items:flex-end">
@@ -987,12 +1004,35 @@ function simpanKeRekap() {
 }
 
 // ════════════════════════════════════════
+//   HELPER: Paritas Nomor Peserta
+// ════════════════════════════════════════
+function isNomorGanjil(no) {
+  const n = parseInt(String(no).replace(/\D/g, ''), 10);
+  return !isNaN(n) && n % 2 !== 0;
+}
+function isNomorGenap(no) {
+  const n = parseInt(String(no).replace(/\D/g, ''), 10);
+  return !isNaN(n) && n % 2 === 0;
+}
+function filterByNomor(data, fn) {
+  if (fn === 'ganjil') return data.filter(r => isNomorGanjil(r.noPeserta));
+  if (fn === 'genap')  return data.filter(r => isNomorGenap(r.noPeserta));
+  return data;
+}
+function paritasBadge(no) {
+  if (isNomorGanjil(no))
+    return `<span style="font-size:0.65rem;background:#FDE8C8;color:#C45C0A;border-radius:4px;padding:1px 6px;font-weight:700;margin-left:4px;">Ganjil</span>`;
+  return `<span style="font-size:0.65rem;background:#E3F2FD;color:#1565C0;border-radius:4px;padding:1px 6px;font-weight:700;margin-left:4px;">Genap</span>`;
+}
+
+// ════════════════════════════════════════
 //   HELPER: Get grouped data with combined scores
 // ════════════════════════════════════════
-function getCombinedData(filterCabang, filterGolongan) {
+function getCombinedData(filterCabang, filterGolongan, filterNomor) {
   let data = [...rekapData];
-  if (filterCabang) data = data.filter(r => r.cabang === filterCabang);
+  if (filterCabang)  data = data.filter(r => r.cabang === filterCabang);
   if (filterGolongan) data = data.filter(r => r.golongan === filterGolongan);
+  data = filterByNomor(data, filterNomor || '');
 
   const combined = {};
 
@@ -1032,11 +1072,14 @@ function getCombinedData(filterCabang, filterGolongan) {
 function getFilteredRekap() {
   const fc = document.getElementById('filterCabang').value;
   const fg = document.getElementById('filterGolongan').value;
-  return getCombinedData(fc, fg);
+  const fn = document.getElementById('filterNomorRekap').value;
+  return getCombinedData(fc, fg, fn);
 }
 
 function renderRekap() {
   const container = document.getElementById('rekap-container');
+  const fn = document.getElementById('filterNomorRekap').value;
+  const nomorLabel = fn === 'ganjil' ? ' (Nomor Ganjil)' : fn === 'genap' ? ' (Nomor Genap)' : '';
   const data = getFilteredRekap();
 
   if (!data.length) {
@@ -1066,7 +1109,7 @@ function renderRekap() {
         <th rowspan="2">Bidang Penilaian</th>
         <th rowspan="2">Jumlah Hakim</th>
         <th colspan="2">Nilai</th>
-        <th rowspan="2">Keterangan</th>
+        <th rowspan="2">Peringkat${nomorLabel}</th>
       </tr>
       <tr>
         <th>Individu</th>
@@ -1090,7 +1133,7 @@ function renderRekap() {
       html += `
         <tr>
           <td>${globalNo}</td>
-          <td><strong>${r.noPeserta}</strong></td>
+          <td><strong>${r.noPeserta}</strong>${paritasBadge(r.noPeserta)}</td>
           <td>${r.cabang}</td>
           <td>${r.golongan}</td>
           <td class="bidang-name">${r.bidang}</td>
@@ -1109,8 +1152,8 @@ function renderRekap() {
 // ════════════════════════════════════════
 //   REKAP AKHIR RENDER - PER CABANG & GOLONGAN
 // ════════════════════════════════════════
-function getRekapAkhirData(filterCabang, filterGolongan) {
-  const combinedData = getCombinedData(filterCabang, filterGolongan);
+function getRekapAkhirData(filterCabang, filterGolongan, filterNomor) {
+  const combinedData = getCombinedData(filterCabang, filterGolongan, filterNomor);
 
   const pesertaMap = {};
 
@@ -1172,7 +1215,9 @@ function renderRekapAkhir() {
   const container = document.getElementById('rekap-akhir-container');
   const fc = document.getElementById('filterCabangAkhir').value;
   const fg = document.getElementById('filterGolonganAkhir').value;
-  const data = getRekapAkhirData(fc, fg);
+  const fn = document.getElementById('filterNomorAkhir').value;
+  const nomorLabel = fn === 'ganjil' ? ' (Nomor Ganjil)' : fn === 'genap' ? ' (Nomor Genap)' : '';
+  const data = getRekapAkhirData(fc, fg, fn);
 
   if (!data.length) {
     container.innerHTML = `<div class="empty-rekap">Belum ada data rekapitulasi atau tidak ada yang cocok dengan filter.</div>`;
@@ -1189,7 +1234,7 @@ function renderRekapAkhir() {
   <table id="rekap-akhir-table">
     <thead>
       <tr>
-        <th rowspan="2">Peringkat</th>
+        <th rowspan="2">Peringkat${nomorLabel}</th>
         <th rowspan="2">No. Peserta</th>
         <th rowspan="2">Cabang</th>
         <th rowspan="2">Golongan</th>
@@ -1221,7 +1266,7 @@ function renderRekapAkhir() {
     html += `
       <tr>
         <td>${rankBadge}</td>
-        <td><strong>${p.noPeserta}</strong></td>
+        <td><strong>${p.noPeserta}</strong>${paritasBadge(p.noPeserta)}</td>
         <td>${p.cabang}</td>
         <td>${p.golongan}</td>`;
 
@@ -1245,6 +1290,8 @@ function renderRekapAkhir() {
 //   EXPORT EXCEL - REKAP
 // ════════════════════════════════════════
 function exportExcelRekap() {
+  const fn = document.getElementById('filterNomorRekap').value;
+  const nomorLabel = fn === 'ganjil' ? ' - Nomor Ganjil' : fn === 'genap' ? ' - Nomor Genap' : '';
   const data = getFilteredRekap();
   if (!data.length) { showToast('⚠ Tidak ada data untuk diekspor!'); return; }
 
@@ -1257,11 +1304,11 @@ function exportExcelRekap() {
   Object.values(groups).forEach(g => g.rows.sort((a, b) => b.nilaiGabungan - a.nilaiGabungan));
 
   const wsData = [
-    ['REKAPITULASI NILAI GABUNGAN MUSABAQOH TILAWATIL QUR\'AN XII TAHUN 2026'],
+    [`REKAPITULASI NILAI GABUNGAN MUSABAQOH TILAWATIL QUR'AN XII TAHUN 2026${nomorLabel}`],
     ['TINGKAT KABUPATEN SERAM BAGIAN TIMUR'],
     ['Lembaga Pengembangan Tilawatil Qur\'an (LPTQ)'],
     [],
-    ['No. Urut', 'No. Peserta', 'Cabang', 'Golongan', 'Bidang Penilaian', 'Jumlah Hakim', 'Nilai Individu', 'Nilai Gabungan (/100)', 'Peringkat']
+    ['No. Urut', 'No. Peserta', 'Paritas', 'Cabang', 'Golongan', 'Bidang Penilaian', 'Jumlah Hakim', 'Nilai Individu', 'Nilai Gabungan (/100)', 'Peringkat']
   ];
 
   let no = 0;
@@ -1269,7 +1316,8 @@ function exportExcelRekap() {
     g.rows.forEach((r, idx) => {
       no++;
       const nilaiIndividu = r.nilaiList.map((n, i) => `${r.hakimList[i]}: ${n}`).join('; ');
-      wsData.push([no, r.noPeserta, r.cabang, r.golongan, r.bidang, r.jumlahHakim, nilaiIndividu, r.nilaiGabungan, idx + 1]);
+      const paritas = isNomorGanjil(r.noPeserta) ? 'Ganjil' : 'Genap';
+      wsData.push([no, r.noPeserta, paritas, r.cabang, r.golongan, r.bidang, r.jumlahHakim, nilaiIndividu, r.nilaiGabungan, idx + 1]);
     });
   });
 
@@ -1277,17 +1325,17 @@ function exportExcelRekap() {
   const ws = XLSX.utils.aoa_to_sheet(wsData);
 
   ws['!cols'] = [
-    {wch: 8}, {wch: 14}, {wch: 12}, {wch: 14}, {wch: 22}, {wch: 14}, {wch: 30}, {wch: 18}, {wch: 10}
+    {wch:8},{wch:14},{wch:10},{wch:12},{wch:14},{wch:22},{wch:14},{wch:30},{wch:18},{wch:10}
   ];
-
   ws['!merges'] = [
-    {s:{r:0,c:0}, e:{r:0,c:8}},
-    {s:{r:1,c:0}, e:{r:1,c:8}},
-    {s:{r:2,c:0}, e:{r:2,c:8}},
+    {s:{r:0,c:0}, e:{r:0,c:9}},
+    {s:{r:1,c:0}, e:{r:1,c:9}},
+    {s:{r:2,c:0}, e:{r:2,c:9}},
   ];
 
+  const suffix = fn === 'ganjil' ? '_Ganjil' : fn === 'genap' ? '_Genap' : '';
   XLSX.utils.book_append_sheet(wb, ws, 'Rekap Gabungan MTQ XII');
-  XLSX.writeFile(wb, 'Rekapitulasi_Gabungan_MTQ_XII_2026_SBT.xlsx');
+  XLSX.writeFile(wb, `Rekapitulasi_Gabungan_MTQ_XII_2026_SBT${suffix}.xlsx`);
   showToast('📥 File Excel berhasil diunduh!');
 }
 
@@ -1297,7 +1345,9 @@ function exportExcelRekap() {
 function exportExcelAkhir() {
   const fc = document.getElementById('filterCabangAkhir').value;
   const fg = document.getElementById('filterGolonganAkhir').value;
-  const data = getRekapAkhirData(fc, fg);
+  const fn = document.getElementById('filterNomorAkhir').value;
+  const nomorLabel = fn === 'ganjil' ? ' - Nomor Ganjil' : fn === 'genap' ? ' - Nomor Genap' : '';
+  const data = getRekapAkhirData(fc, fg, fn);
 
   if (!data.length) { showToast('⚠ Tidak ada data untuk diekspor!'); return; }
 
@@ -1308,15 +1358,16 @@ function exportExcelAkhir() {
   const bidangList = Array.from(allBidangs);
 
   const wsData = [
-    ['REKAP AKHIR MUSABAQOH TILAWATIL QUR\'AN XII TAHUN 2026'],
+    [`REKAP AKHIR MUSABAQOH TILAWATIL QUR'AN XII TAHUN 2026${nomorLabel}`],
     ['TINGKAT KABUPATEN SERAM BAGIAN TIMUR'],
     ['Lembaga Pengembangan Tilawatil Qur\'an (LPTQ)'],
     [],
-    ['Peringkat', 'No. Peserta', 'Cabang', 'Golongan', ...bidangList, 'Total Nilai', 'Rata-rata', 'Keterangan']
+    ['Peringkat', 'No. Peserta', 'Paritas', 'Cabang', 'Golongan', ...bidangList, 'Total Nilai', 'Rata-rata', 'Keterangan']
   ];
 
   data.forEach((p) => {
-    const row = [p.rank, p.noPeserta, p.cabang, p.golongan];
+    const paritas = isNomorGanjil(p.noPeserta) ? 'Ganjil' : 'Genap';
+    const row = [p.rank, p.noPeserta, paritas, p.cabang, p.golongan];
     bidangList.forEach(b => row.push(p.bidangScores[b] || '-'));
     row.push(Math.round(p.totalNilai * 100) / 100, p.rataRata, `Juara ${p.rank}`);
     wsData.push(row);
@@ -1325,20 +1376,21 @@ function exportExcelAkhir() {
   const wb = XLSX.utils.book_new();
   const ws = XLSX.utils.aoa_to_sheet(wsData);
 
-  const colWidths = [{wch: 10}, {wch: 14}, {wch: 12}, {wch: 14}];
-  bidangList.forEach(() => colWidths.push({wch: 16}));
-  colWidths.push({wch: 14}, {wch: 12}, {wch: 14});
+  const colWidths = [{wch:10},{wch:14},{wch:10},{wch:12},{wch:14}];
+  bidangList.forEach(() => colWidths.push({wch:16}));
+  colWidths.push({wch:14},{wch:12},{wch:14});
   ws['!cols'] = colWidths;
 
-  const lastCol = 3 + bidangList.length + 2;
+  const lastCol = 4 + bidangList.length + 2;
   ws['!merges'] = [
     {s:{r:0,c:0}, e:{r:0,c:lastCol}},
     {s:{r:1,c:0}, e:{r:1,c:lastCol}},
     {s:{r:2,c:0}, e:{r:2,c:lastCol}},
   ];
 
+  const suffix = fn === 'ganjil' ? '_Ganjil' : fn === 'genap' ? '_Genap' : '';
   XLSX.utils.book_append_sheet(wb, ws, 'Rekap Akhir MTQ XII');
-  XLSX.writeFile(wb, 'Rekap_Akhir_MTQ_XII_2026_SBT.xlsx');
+  XLSX.writeFile(wb, `Rekap_Akhir_MTQ_XII_2026_SBT${suffix}.xlsx`);
   showToast('📥 File Excel berhasil diunduh!');
 }
 
