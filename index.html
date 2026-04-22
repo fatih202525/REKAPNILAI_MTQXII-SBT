@@ -34,7 +34,6 @@ color: var(--text-main);
 min-height: 100vh;
 }
 
-/* ── ISLAMIC ORNAMENT SVG PATTERN ── */
 body::before {
 content: '';
 position: fixed;
@@ -44,7 +43,6 @@ pointer-events: none;
 z-index: 0;
 }
 
-/* ── HEADER ── */
 header {
 background: linear-gradient(135deg, var(--orange-deep) 0%, var(--orange-main) 50%, var(--orange-light) 100%);
 position: relative;
@@ -60,7 +58,6 @@ background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBo
 pointer-events: none;
 }
 
-/* Arabesque border top */
 header::after {
 content: '';
 position: absolute;
@@ -132,7 +129,6 @@ margin-top: 3px;
 font-style: italic;
 }
 
-/* Ornament divider */
 .ornament-bar {
 text-align: center;
 background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
@@ -142,16 +138,14 @@ letter-spacing: 0.5em;
 padding: 4px 0;
 }
 
-/* ── MAIN LAYOUT ── */
 .container {
 position: relative;
 z-index: 1;
-max-width: 1280px;
+max-width: 1400px;
 margin: 0 auto;
 padding: 28px 20px 48px;
 }
 
-/* ── TABS ── */
 .tabs {
 display: flex;
 gap: 4px;
@@ -161,6 +155,7 @@ border: 2px solid var(--border);
 border-radius: 12px;
 padding: 6px;
 box-shadow: 0 2px 10px var(--shadow);
+flex-wrap: wrap;
 }
 
 .tab-btn {
@@ -175,6 +170,7 @@ font-size: 0.92rem;
 color: var(--dark-brown);
 cursor: pointer;
 transition: all 0.2s;
+min-width: 140px;
 }
 
 .tab-btn.active {
@@ -190,7 +186,6 @@ background: rgba(224,120,32,0.15);
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
 
-/* ── CARD ── */
 .card {
 background: var(--white);
 border: 2px solid var(--border);
@@ -229,7 +224,6 @@ color: var(--gold);
 font-size: 0.85rem;
 }
 
-/* ── FORM GRID ── */
 .form-grid {
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -267,7 +261,6 @@ border-color: var(--orange-main);
 box-shadow: 0 0 0 3px rgba(224,120,32,0.18);
 }
 
-/* ── SCORING TABLE ── */
 .scoring-table {
 width: 100%;
 border-collapse: collapse;
@@ -308,7 +301,6 @@ font-weight: 600;
 color: var(--dark-brown);
 }
 
-/* ── BUTTONS ── */
 .btn {
 display: inline-flex;
 align-items: center;
@@ -363,22 +355,22 @@ flex-wrap: wrap;
 margin-top: 20px;
 }
 
-/* ── REKAP TABLE ── */
-#rekap-container {
+#rekap-container, #rekap-akhir-container {
 overflow-x: auto;
 border-radius: 10px;
 border: 2px solid var(--border);
 box-shadow: 0 3px 14px var(--shadow);
 }
 
-#rekap-table {
+#rekap-table, #rekap-akhir-table {
 width: 100%;
 border-collapse: collapse;
 font-size: 0.82rem;
-min-width: 800px;
+min-width: 900px;
 }
 
-#rekap-table thead tr:first-child th {
+#rekap-table thead tr:first-child th,
+#rekap-akhir-table thead tr:first-child th {
 background: linear-gradient(135deg, var(--orange-deep), var(--orange-main));
 color: white;
 font-family: 'Cairo', sans-serif;
@@ -389,7 +381,8 @@ font-size: 0.84rem;
 border: 1px solid rgba(255,255,255,0.2);
 }
 
-#rekap-table thead tr:nth-child(2) th {
+#rekap-table thead tr:nth-child(2) th,
+#rekap-akhir-table thead tr:nth-child(2) th {
 background: var(--orange-light);
 color: var(--dark);
 font-family: 'Cairo', sans-serif;
@@ -400,15 +393,19 @@ border: 1px solid var(--border);
 text-align: center;
 }
 
-#rekap-table tbody td {
+#rekap-table tbody td,
+#rekap-akhir-table tbody td {
 padding: 8px 10px;
 border: 1px solid rgba(212,129,58,0.3);
 text-align: center;
 vertical-align: middle;
 }
 
-#rekap-table tbody tr:nth-child(even) td { background: var(--orange-pale); }
-#rekap-table tbody tr:hover td { background: rgba(224,120,32,0.14); }
+#rekap-table tbody tr:nth-child(even) td,
+#rekap-akhir-table tbody tr:nth-child(even) td { background: var(--orange-pale); }
+
+#rekap-table tbody tr:hover td,
+#rekap-akhir-table tbody tr:hover td { background: rgba(224,120,32,0.14); }
 
 .rank-badge {
 display: inline-flex;
@@ -432,6 +429,14 @@ color: var(--orange-deep);
 font-size: 0.92rem;
 }
 
+.gabungan-cell {
+font-family: 'Cairo', sans-serif;
+font-weight: 800;
+color: #2e7d32;
+font-size: 0.95rem;
+background: rgba(46, 125, 50, 0.1);
+}
+
 .empty-rekap {
 text-align: center;
 padding: 40px;
@@ -440,7 +445,6 @@ font-style: italic;
 font-size: 0.95rem;
 }
 
-/* ── FILTER ROW ── */
 .filter-row {
 display: flex;
 gap: 14px;
@@ -451,7 +455,6 @@ align-items: flex-end;
 
 .filter-row .form-group { min-width: 180px; }
 
-/* ── ORNAMENT FOOTER ── */
 .ornament-footer {
 text-align: center;
 margin-top: 40px;
@@ -461,7 +464,6 @@ letter-spacing: 0.3em;
 opacity: 0.5;
 }
 
-/* ── TOAST ── */
 #toast {
 position: fixed;
 bottom: 28px; right: 28px;
@@ -491,6 +493,7 @@ pointer-events: none;
 </head>
 <body>
 
+<header>
 <!-- ══ HEADER ══ -->
 <header>
 <div class="header-inner">
@@ -520,16 +523,15 @@ pointer-events: none;
 
 </header>
 
-<!-- ══ MAIN ══ -->
 <div class="container">
 
-<!-- TABS -->
 <div class="tabs">
-<button class="tab-btn active" onclick="switchTab('input')">✏️ Input Nilai Dewan Hakim</button>
-<button class="tab-btn" onclick="switchTab('rekap')">📊 Rekapitulasi Akhir</button>
+<button class="tab-btn active" onclick="switchTab('input', this)">✏️ Input Nilai Dewan Hakim</button>
+<button class="tab-btn" onclick="switchTab('rekap', this)">📊 Rekapitulasi Gabungan</button>
+<button class="tab-btn" onclick="switchTab('rekap-akhir', this)">🏆 Rekap Akhir</button>
 </div>
 
-<!-- ════ TAB: INPUT ════ -->
+<!-- TAB INPUT -->
 <div id="tab-input" class="tab-panel active">
 <div class="card">
 <div class="card-title">Form Input Nilai Dewan Hakim</div>
@@ -577,7 +579,6 @@ pointer-events: none;
 </div>
 </div>
 
-<!-- Tabel nilai yang baru diinput -->
 <div class="card">
 <div class="card-title">Data Nilai Belum Direkap</div>
 <div style="overflow-x:auto">
@@ -605,14 +606,14 @@ pointer-events: none;
 </div>
 </div>
 
-<!-- ════ TAB: REKAP ════ -->
+<!-- TAB REKAP -->
 <div id="tab-rekap" class="tab-panel">
 <div class="card">
-<div class="card-title">Filter Rekapitulasi</div>
+<div class="card-title">Filter Rekapitulasi Gabungan</div>
 <div class="filter-row">
 <div class="form-group">
 <label>Filter Cabang</label>
-<select id="filterCabang" onchange="renderRekap()">
+<select id="filterCabang" onchange="updateFilterGolongan(); renderRekap();">
 <option value="">Semua Cabang</option>
 <option value="Tilawah">Tilawah</option>
 <option value="Tartil">Tartil</option>
@@ -627,15 +628,51 @@ pointer-events: none;
 </select>
 </div>
 <div style="display:flex;gap:10px;align-items:flex-end">
-<button class="btn btn-success" onclick="exportExcel()">📥 Unduh Excel</button>
+<button class="btn btn-success" onclick="exportExcelRekap()">📥 Unduh Excel</button>
 <button class="btn btn-gold" onclick="renderRekap()">🔄 Refresh</button>
 </div>
 </div>
 </div>
 
 <div class="card">
-<div class="card-title">Tabel Rekapitulasi Nilai Akhir Dewan Hakim</div>
+<div class="card-title">Tabel Rekapitulasi Nilai Gabungan (Rata-rata 2 Hakim)</div>
 <div id="rekap-container">
+<div class="empty-rekap">Belum ada data rekapitulasi. Silakan input dan simpan nilai terlebih dahulu.</div>
+</div>
+</div>
+</div>
+
+<!-- TAB REKAP AKHIR -->
+<div id="tab-rekap-akhir" class="tab-panel">
+<div class="card">
+<div class="card-title">Filter Rekap Akhir</div>
+<div class="filter-row">
+<div class="form-group">
+<label>Filter Cabang</label>
+<select id="filterCabangAkhir" onchange="updateFilterGolonganAkhir(); renderRekapAkhir();">
+<option value="">Semua Cabang</option>
+<option value="Tilawah">Tilawah</option>
+<option value="Tartil">Tartil</option>
+<option value="Hifdzil">Hifdzil</option>
+<option value="Syarhil">Syarhil</option>
+</select>
+</div>
+<div class="form-group">
+<label>Filter Golongan</label>
+<select id="filterGolonganAkhir" onchange="renderRekapAkhir()">
+<option value="">Semua Golongan</option>
+</select>
+</div>
+<div style="display:flex;gap:10px;align-items:flex-end">
+<button class="btn btn-success" onclick="exportExcelAkhir()">📥 Unduh Excel</button>
+<button class="btn btn-gold" onclick="renderRekapAkhir()">🔄 Refresh</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">Tabel Rekap Akhir - Total Nilai Gabungan Semua Bidang</div>
+<div id="rekap-akhir-container">
 <div class="empty-rekap">Belum ada data rekapitulasi. Silakan input dan simpan nilai terlebih dahulu.</div>
 </div>
 </div>
@@ -680,36 +717,72 @@ Syarhil: {
 }
 };
 
-let inputRows = []; // temp before save
-let rekapData = []; // saved rekap rows
+let inputRows = [];
+let rekapData = [];
+
+// ════════════════════════════════════════
+// HELPER: Populate Select Options using add()
+// ════════════════════════════════════════
+function populateSelect(selectId, options, defaultText, defaultValue) {
+const select = document.getElementById(selectId);
+if (!select) {
+console.error('Select element not found:', selectId);
+return;
+}
+
+// Clear existing options
+while (select.options.length > 0) {
+select.remove(0);
+}
+
+// Add default option
+const defaultOpt = document.createElement('option');
+defaultOpt.value = defaultValue || '';
+defaultOpt.textContent = defaultText;
+select.add(defaultOpt);
+
+// Add options
+options.forEach(opt => {
+const option = document.createElement('option');
+option.value = opt;
+option.textContent = opt;
+select.add(option);
+});
+
+console.log('Populated', selectId, 'with', options.length, 'options');
+}
 
 // ════════════════════════════════════════
 // FORM LOGIC
 // ════════════════════════════════════════
 function updateGolongan() {
 const cabang = document.getElementById('cabang').value;
-const sel = document.getElementById('golongan');
-sel.innerHTML = '<option value="">-- Pilih Golongan --</option>';
-(GOLONGAN_MAP[cabang] || []).forEach(g => {
-sel.innerHTML += `<option value="${g}">${g}</option>`;
-});
-document.getElementById('bidangPenilaian').innerHTML = '<option value="">-- Pilih Bidang --</option>';
+const golonganList = GOLONGAN_MAP[cabang] || [];
 
-// Also update filter golongan
-const fg = document.getElementById('filterGolongan');
-fg.innerHTML = '<option value="">Semua Golongan</option>';
-(GOLONGAN_MAP[cabang] || []).forEach(g => {
-fg.innerHTML += `<option value="${g}">${g}</option>`;
-});
+populateSelect('golongan', golonganList, '-- Pilih Golongan --');
+populateSelect('bidangPenilaian', [], '-- Pilih Bidang --');
 }
 
 function updateBidang() {
 const cabang = document.getElementById('cabang').value;
 const golongan = document.getElementById('golongan').value;
-const sel = document.getElementById('bidangPenilaian');
-sel.innerHTML = '<option value="">-- Pilih Bidang --</option>';
-const bidangs = (BIDANG_MAP[cabang] || {})[golongan] || [];
-bidangs.forEach(b => { sel.innerHTML += `<option value="${b}">${b}</option>`; });
+const bidangList = (BIDANG_MAP[cabang] || {})[golongan] || [];
+
+populateSelect('bidangPenilaian', bidangList, '-- Pilih Bidang --');
+}
+
+function updateFilterGolongan() {
+const cabang = document.getElementById('filterCabang').value;
+const golonganList = GOLONGAN_MAP[cabang] || [];
+
+populateSelect('filterGolongan', golonganList, 'Semua Golongan');
+}
+
+function updateFilterGolonganAkhir() {
+const cabang = document.getElementById('filterCabangAkhir').value;
+const golonganList = GOLONGAN_MAP[cabang] || [];
+
+populateSelect('filterGolonganAkhir', golonganList, 'Semua Golongan');
 }
 
 function tambahNilai() {
@@ -743,8 +816,8 @@ renderInputTable();
 function resetForm() {
 document.getElementById('noPeserta').value = '';
 document.getElementById('cabang').value = '';
-document.getElementById('golongan').innerHTML = '<option value="">-- Pilih Golongan --</option>';
-document.getElementById('bidangPenilaian').innerHTML = '<option value="">-- Pilih Bidang --</option>';
+populateSelect('golongan', [], '-- Pilih Golongan --');
+populateSelect('bidangPenilaian', [], '-- Pilih Bidang --');
 document.getElementById('namaHakim').value = '';
 document.getElementById('nilaiInput').value = '';
 inputRows = [];
@@ -780,19 +853,57 @@ rekapData = rekapData.concat(inputRows.map(r => ({...r})));
 inputRows = [];
 renderInputTable();
 renderRekap();
+renderRekapAkhir();
 showToast('💾 Data berhasil disimpan ke rekapitulasi!');
 }
 
 // ════════════════════════════════════════
-// REKAP RENDER
+// HELPER: Get grouped data with combined scores
+// ════════════════════════════════════════
+function getCombinedData(filterCabang, filterGolongan) {
+let data = [...rekapData];
+if (filterCabang) data = data.filter(r => r.cabang === filterCabang);
+if (filterGolongan) data = data.filter(r => r.golongan === filterGolongan);
+
+const combined = {};
+
+data.forEach(r => {
+const key = `${r.noPeserta}||${r.cabang}||${r.golongan}||${r.bidang}`;
+if (!combined[key]) {
+combined[key] = {
+noPeserta: r.noPeserta,
+cabang: r.cabang,
+golongan: r.golongan,
+bidang: r.bidang,
+nilaiList: [],
+hakimList: []
+};
+}
+combined[key].nilaiList.push(r.nilai);
+combined[key].hakimList.push(r.hakim);
+});
+
+const result = [];
+Object.values(combined).forEach(item => {
+const gabungan = item.nilaiList.reduce((a, b) => a + b, 0) / item.nilaiList.length;
+result.push({
+...item,
+nilaiGabungan: Math.round(gabungan * 100) / 100,
+jumlahHakim: item.nilaiList.length,
+hakimDisplay: item.hakimList.join(', ')
+});
+});
+
+return result;
+}
+
+// ════════════════════════════════════════
+// REKAP RENDER (with Combined Score)
 // ════════════════════════════════════════
 function getFilteredRekap() {
 const fc = document.getElementById('filterCabang').value;
 const fg = document.getElementById('filterGolongan').value;
-let data = [...rekapData];
-if (fc) data = data.filter(r => r.cabang === fc);
-if (fg) data = data.filter(r => r.golongan === fg);
-return data;
+return getCombinedData(fc, fg);
 }
 
 function renderRekap() {
@@ -804,7 +915,6 @@ container.innerHTML = `<div class="empty-rekap">Belum ada data rekapitulasi atau
 return;
 }
 
-// Group by cabang + golongan + bidang
 const groups = {};
 data.forEach(r => {
 const key = `${r.cabang}||${r.golongan}||${r.bidang}`;
@@ -812,12 +922,10 @@ if (!groups[key]) groups[key] = { cabang: r.cabang, golongan: r.golongan, bidang
 groups[key].rows.push(r);
 });
 
-// Sort each group by nilai DESC
 Object.values(groups).forEach(g => {
-g.rows.sort((a, b) => b.nilai - a.nilai);
+g.rows.sort((a, b) => b.nilaiGabungan - a.nilaiGabungan);
 });
 
-// Build table HTML
 let html = `
 <table id="rekap-table">
 <thead>
@@ -827,12 +935,13 @@ let html = `
 <th rowspan="2">Cabang</th>
 <th rowspan="2">Golongan</th>
 <th rowspan="2">Bidang Penilaian</th>
-<th rowspan="2">Nama Dewan Hakim</th>
-<th colspan="1">Nilai</th>
+<th rowspan="2">Jumlah Hakim</th>
+<th colspan="2">Nilai</th>
 <th rowspan="2">Keterangan</th>
 </tr>
 <tr>
-<th>Akhir (/100)</th>
+<th>Individu</th>
+<th>Gabungan (/100)</th>
 </tr>
 </thead>
 <tbody>`;
@@ -847,6 +956,8 @@ if (rank === 1) rankBadge = `<span class="rank-badge rank-1">1</span>`;
 else if (rank === 2) rankBadge = `<span class="rank-badge rank-2">2</span>`;
 else if (rank === 3) rankBadge = `<span class="rank-badge rank-3">3</span>`;
 
+const nilaiIndividu = r.nilaiList.map((n, i) => `${r.hakimList[i]}: ${n}`).join('<br>');
+
 html += `
 <tr>
 <td>${globalNo}</td>
@@ -854,8 +965,9 @@ html += `
 <td>${r.cabang}</td>
 <td>${r.golongan}</td>
 <td class="bidang-name">${r.bidang}</td>
-<td>${r.hakim}</td>
-<td class="total-cell">${r.nilai}</td>
+<td>${r.jumlahHakim} hakim</td>
+<td style="font-size:0.75rem;text-align:left;">${nilaiIndividu}</td>
+<td class="gabungan-cell">${r.nilaiGabungan}</td>
 <td>${rankBadge}</td>
 </tr>`;
 });
@@ -866,66 +978,219 @@ container.innerHTML = html;
 }
 
 // ════════════════════════════════════════
-// EXPORT EXCEL
+// REKAP AKHIR RENDER
 // ════════════════════════════════════════
-function exportExcel() {
+function getRekapAkhirData(filterCabang, filterGolongan) {
+const combinedData = getCombinedData(filterCabang, filterGolongan);
+
+const pesertaMap = {};
+
+combinedData.forEach(r => {
+const key = `${r.noPeserta}||${r.cabang}||${r.golongan}`;
+if (!pesertaMap[key]) {
+pesertaMap[key] = {
+noPeserta: r.noPeserta,
+cabang: r.cabang,
+golongan: r.golongan,
+bidangScores: {},
+totalNilai: 0,
+jumlahBidang: 0
+};
+}
+pesertaMap[key].bidangScores[r.bidang] = r.nilaiGabungan;
+pesertaMap[key].totalNilai += r.nilaiGabungan;
+pesertaMap[key].jumlahBidang++;
+});
+
+const result = Object.values(pesertaMap).map(p => ({
+...p,
+rataRata: Math.round((p.totalNilai / p.jumlahBidang) * 100) / 100
+}));
+
+result.sort((a, b) => b.totalNilai - a.totalNilai);
+
+return result;
+}
+
+function renderRekapAkhir() {
+const container = document.getElementById('rekap-akhir-container');
+const fc = document.getElementById('filterCabangAkhir').value;
+const fg = document.getElementById('filterGolonganAkhir').value;
+const data = getRekapAkhirData(fc, fg);
+
+if (!data.length) {
+container.innerHTML = `<div class="empty-rekap">Belum ada data rekapitulasi atau tidak ada yang cocok dengan filter.</div>`;
+return;
+}
+
+const allBidangs = new Set();
+data.forEach(p => {
+Object.keys(p.bidangScores).forEach(b => allBidangs.add(b));
+});
+const bidangList = Array.from(allBidangs);
+
+let html = `
+<table id="rekap-akhir-table">
+<thead>
+<tr>
+<th rowspan="2">Peringkat</th>
+<th rowspan="2">No. Peserta</th>
+<th rowspan="2">Cabang</th>
+<th rowspan="2">Golongan</th>
+<th colspan="${bidangList.length}">Nilai Gabungan per Bidang</th>
+<th rowspan="2">Total Nilai</th>
+<th rowspan="2">Rata-rata</th>
+<th rowspan="2">Keterangan</th>
+</tr>
+<tr>`;
+
+bidangList.forEach(b => {
+html += `<th>${b}</th>`;
+});
+
+html += `</tr></thead><tbody>`;
+
+data.forEach((p, idx) => {
+const rank = idx + 1;
+let rankBadge = `<span class="rank-badge rank-other">${rank}</span>`;
+if (rank === 1) rankBadge = `<span class="rank-badge rank-1">1</span>`;
+else if (rank === 2) rankBadge = `<span class="rank-badge rank-2">2</span>`;
+else if (rank === 3) rankBadge = `<span class="rank-badge rank-3">3</span>`;
+
+html += `
+<tr>
+<td>${rankBadge}</td>
+<td><strong>${p.noPeserta}</strong></td>
+<td>${p.cabang}</td>
+<td>${p.golongan}</td>`;
+
+bidangList.forEach(b => {
+const score = p.bidangScores[b] || '-';
+html += `<td class="total-cell">${score}</td>`;
+});
+
+html += `
+<td class="gabungan-cell">${Math.round(p.totalNilai * 100) / 100}</td>
+<td class="total-cell">${p.rataRata}</td>
+<td><strong style="color:var(--orange-deep)">Juara ${rank}</strong></td>
+</tr>`;
+});
+
+html += `</tbody></table>`;
+container.innerHTML = html;
+}
+
+// ════════════════════════════════════════
+// EXPORT EXCEL - REKAP
+// ════════════════════════════════════════
+function exportExcelRekap() {
 const data = getFilteredRekap();
 if (!data.length) { showToast('⚠ Tidak ada data untuk diekspor!'); return; }
 
-// Group & sort sama seperti renderRekap
 const groups = {};
 data.forEach(r => {
 const key = `${r.cabang}||${r.golongan}||${r.bidang}`;
 if (!groups[key]) groups[key] = { cabang: r.cabang, golongan: r.golongan, bidang: r.bidang, rows: [] };
 groups[key].rows.push(r);
 });
-Object.values(groups).forEach(g => g.rows.sort((a, b) => b.nilai - a.nilai));
+Object.values(groups).forEach(g => g.rows.sort((a, b) => b.nilaiGabungan - a.nilaiGabungan));
 
 const wsData = [
-['REKAPITULASI NILAI AKHIR MUSABAQOH TILAWATIL QUR\'AN XII TAHUN 2026'],
+['REKAPITULASI NILAI GABUNGAN MUSABAQOH TILAWATIL QUR\'AN XII TAHUN 2026'],
 ['TINGKAT KABUPATEN SERAM BAGIAN TIMUR'],
 ['Lembaga Pengembangan Tilawatil Qur\'an (LPTQ)'],
 [],
-['No. Urut', 'No. Peserta', 'Cabang', 'Golongan', 'Bidang Penilaian', 'Nama Dewan Hakim', 'Nilai Akhir (/100)', 'Peringkat']
+['No. Urut', 'No. Peserta', 'Cabang', 'Golongan', 'Bidang Penilaian', 'Jumlah Hakim', 'Nilai Individu', 'Nilai Gabungan (/100)', 'Peringkat']
 ];
 
 let no = 0;
 Object.values(groups).forEach(g => {
 g.rows.forEach((r, idx) => {
 no++;
-wsData.push([no, r.noPeserta, r.cabang, r.golongan, r.bidang, r.hakim, r.nilai, idx + 1]);
+const nilaiIndividu = r.nilaiList.map((n, i) => `${r.hakimList[i]}: ${n}`).join('; ');
+wsData.push([no, r.noPeserta, r.cabang, r.golongan, r.bidang, r.jumlahHakim, nilaiIndividu, r.nilaiGabungan, idx + 1]);
 });
 });
 
 const wb = XLSX.utils.book_new();
 const ws = XLSX.utils.aoa_to_sheet(wsData);
 
-// Lebar kolom
 ws['!cols'] = [
-{wch: 8}, {wch: 14}, {wch: 12}, {wch: 14}, {wch: 22}, {wch: 26}, {wch: 16}, {wch: 10}
+{wch: 8}, {wch: 14}, {wch: 12}, {wch: 14}, {wch: 22}, {wch: 14}, {wch: 30}, {wch: 18}, {wch: 10}
 ];
 
-// Merge header rows
 ws['!merges'] = [
-{s:{r:0,c:0}, e:{r:0,c:7}},
-{s:{r:1,c:0}, e:{r:1,c:7}},
-{s:{r:2,c:0}, e:{r:2,c:7}},
+{s:{r:0,c:0}, e:{r:0,c:8}},
+{s:{r:1,c:0}, e:{r:1,c:8}},
+{s:{r:2,c:0}, e:{r:2,c:8}},
 ];
 
-XLSX.utils.book_append_sheet(wb, ws, 'Rekapitulasi MTQ XII');
-XLSX.writeFile(wb, 'Rekapitulasi_MTQ_XII_2026_SBT.xlsx');
+XLSX.utils.book_append_sheet(wb, ws, 'Rekap Gabungan MTQ XII');
+XLSX.writeFile(wb, 'Rekapitulasi_Gabungan_MTQ_XII_2026_SBT.xlsx');
+showToast('📥 File Excel berhasil diunduh!');
+}
+
+// ════════════════════════════════════════
+// EXPORT EXCEL - REKAP AKHIR
+// ════════════════════════════════════════
+function exportExcelAkhir() {
+const fc = document.getElementById('filterCabangAkhir').value;
+const fg = document.getElementById('filterGolonganAkhir').value;
+const data = getRekapAkhirData(fc, fg);
+
+if (!data.length) { showToast('⚠ Tidak ada data untuk diekspor!'); return; }
+
+const allBidangs = new Set();
+data.forEach(p => {
+Object.keys(p.bidangScores).forEach(b => allBidangs.add(b));
+});
+const bidangList = Array.from(allBidangs);
+
+const wsData = [
+['REKAP AKHIR MUSABAQOH TILAWATIL QUR\'AN XII TAHUN 2026'],
+['TINGKAT KABUPATEN SERAM BAGIAN TIMUR'],
+['Lembaga Pengembangan Tilawatil Qur\'an (LPTQ)'],
+[],
+['Peringkat', 'No. Peserta', 'Cabang', 'Golongan', ...bidangList, 'Total Nilai', 'Rata-rata', 'Keterangan']
+];
+
+data.forEach((p, idx) => {
+const row = [idx + 1, p.noPeserta, p.cabang, p.golongan];
+bidangList.forEach(b => row.push(p.bidangScores[b] || '-'));
+row.push(Math.round(p.totalNilai * 100) / 100, p.rataRata, `Juara ${idx + 1}`);
+wsData.push(row);
+});
+
+const wb = XLSX.utils.book_new();
+const ws = XLSX.utils.aoa_to_sheet(wsData);
+
+const colWidths = [{wch: 10}, {wch: 14}, {wch: 12}, {wch: 14}];
+bidangList.forEach(() => colWidths.push({wch: 16}));
+colWidths.push({wch: 14}, {wch: 12}, {wch: 14});
+ws['!cols'] = colWidths;
+
+const lastCol = 3 + bidangList.length + 2;
+ws['!merges'] = [
+{s:{r:0,c:0}, e:{r:0,c:lastCol}},
+{s:{r:1,c:0}, e:{r:1,c:lastCol}},
+{s:{r:2,c:0}, e:{r:2,c:lastCol}},
+];
+
+XLSX.utils.book_append_sheet(wb, ws, 'Rekap Akhir MTQ XII');
+XLSX.writeFile(wb, 'Rekap_Akhir_MTQ_XII_2026_SBT.xlsx');
 showToast('📥 File Excel berhasil diunduh!');
 }
 
 // ════════════════════════════════════════
 // TABS
 // ════════════════════════════════════════
-function switchTab(tab) {
+function switchTab(tab, btn) {
 document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
 document.getElementById(`tab-${tab}`).classList.add('active');
-event.target.classList.add('active');
+if (btn) btn.classList.add('active');
 if (tab === 'rekap') renderRekap();
+if (tab === 'rekap-akhir') renderRekapAkhir();
 }
 
 // ════════════════════════════════════════
@@ -938,19 +1203,11 @@ t.classList.add('show');
 setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-// ════════════════════════════════════════
-// Filter golongan sync with cabang filter
-// ════════════════════════════════════════
-document.getElementById('filterCabang').addEventListener('change', function() {
-const fg = document.getElementById('filterGolongan');
-fg.innerHTML = '<option value="">Semua Golongan</option>';
-(GOLONGAN_MAP[this.value] || []).forEach(g => {
-fg.innerHTML += `<option value="${g}">${g}</option>`;
-});
-renderRekap();
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+console.log('Page loaded, initializing...');
 });
 </script>
 </body>
 </html>
-
 
