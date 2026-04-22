@@ -5,495 +5,533 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rekapitulasi Nilai MTQ XII 2026 - Kab. Seram Bagian Timur</title>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Serif:wght@400;600;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-
 <style>
-:root {
---orange-deep: #C45C0A;
---orange-main: #E07820;
---orange-light: #F5A340;
---orange-pale: #FDE8C8;
---gold: #D4A017;
---gold-light: #F0C94A;
---dark: #1A0E00;
---dark-brown: #3B1F00;
---text-main: #2C1600;
---white: #FFFDF8;
---cream: #FFF6E8;
---border: #D4813A;
---shadow: rgba(180,80,0,0.18);
-}
+  :root {
+    --orange-deep: #C45C0A;
+    --orange-main: #E07820;
+    --orange-light: #F5A340;
+    --orange-pale: #FDE8C8;
+    --gold: #D4A017;
+    --gold-light: #F0C94A;
+    --dark: #1A0E00;
+    --dark-brown: #3B1F00;
+    --text-main: #2C1600;
+    --white: #FFFDF8;
+    --cream: #FFF6E8;
+    --border: #D4813A;
+    --shadow: rgba(180,80,0,0.18);
+  }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-body {
-font-family: 'Noto Serif', serif;
-background: var(--cream);
-color: var(--text-main);
-min-height: 100vh;
-}
+  body {
+    font-family: 'Noto Serif', serif;
+    background: var(--cream);
+    color: var(--text-main);
+    min-height: 100vh;
+  }
 
-body::before {
-content: '';
-position: fixed;
-inset: 0;
-background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23E07820' fill-opacity='0.06'%3E%3Cpath d='M40 0 L50 30 L80 40 L50 50 L40 80 L30 50 L0 40 L30 30 Z'/%3E%3Cpath d='M40 20 L45 35 L60 40 L45 45 L40 60 L35 45 L20 40 L35 35 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-pointer-events: none;
-z-index: 0;
-}
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23E07820' fill-opacity='0.06'%3E%3Cpath d='M40 0 L50 30 L80 40 L50 50 L40 80 L30 50 L0 40 L30 30 Z'/%3E%3Cpath d='M40 20 L45 35 L60 40 L45 45 L40 60 L35 45 L20 40 L35 35 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
 
-header {
-background: linear-gradient(135deg, var(--orange-deep) 0%, var(--orange-main) 50%, var(--orange-light) 100%);
-position: relative;
-overflow: hidden;
-box-shadow: 0 4px 24px var(--shadow);
-}
+  header {
+    background: linear-gradient(135deg, var(--orange-deep) 0%, var(--orange-main) 50%, var(--orange-light) 100%);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 24px var(--shadow);
+  }
 
-header::before {
-content: '';
-position: absolute;
-inset: 0;
-background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FFFFFF' fill-opacity='0.07'%3E%3Cpath d='M60 0 L70 40 L110 40 L78 65 L90 100 L60 78 L30 100 L42 65 L10 40 L50 40 Z'/%3E%3Cpath d='M60 15 L66 36 L88 36 L70 49 L77 70 L60 58 L43 70 L50 49 L32 36 L54 36 Z'/%3E%3C/g%3E%3C/svg%3E");
-pointer-events: none;
-}
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FFFFFF' fill-opacity='0.07'%3E%3Cpath d='M60 0 L70 40 L110 40 L78 65 L90 100 L60 78 L30 100 L42 65 L10 40 L50 40 Z'/%3E%3Cpath d='M60 15 L66 36 L88 36 L70 49 L77 70 L60 58 L43 70 L50 49 L32 36 L54 36 Z'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
 
-header::after {
-content: '';
-position: absolute;
-bottom: 0; left: 0; right: 0;
-height: 6px;
-background: repeating-linear-gradient(90deg, var(--gold) 0px, var(--gold) 10px, var(--gold-light) 10px, var(--gold-light) 20px);
-}
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 6px;
+    background: repeating-linear-gradient(90deg, var(--gold) 0px, var(--gold) 10px, var(--gold-light) 10px, var(--gold-light) 20px);
+  }
 
-.header-inner {
-position: relative;
-z-index: 1;
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 18px 32px 24px;
-gap: 20px;
-}
+  .header-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px 24px;
+    gap: 20px;
+  }
 
-.logo-box {
-width: 100px; height: 100px;
-flex-shrink: 0;
-display: flex; align-items: center; justify-content: center;
-background: rgba(255,255,255,0.15);
-border-radius: 50%;
-border: 3px solid rgba(255,255,255,0.4);
-backdrop-filter: blur(4px);
-overflow: hidden;
-box-shadow: 0 2px 16px rgba(0,0,0,0.2);
-}
+  .logo-box {
+    width: 100px; height: 100px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.4);
+    backdrop-filter: blur(4px);
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+  }
 
-.logo-box svg { width: 76px; height: 76px; }
+  .logo-box svg { width: 76px; height: 76px; }
 
-.header-text {
-flex: 1;
-text-align: center;
-color: var(--white);
-}
+  .header-text {
+    flex: 1;
+    text-align: center;
+    color: var(--white);
+  }
 
-.header-text .bismillah {
-font-family: 'Amiri', serif;
-font-size: 1.8rem;
-color: var(--gold-light);
-letter-spacing: 0.04em;
-margin-bottom: 4px;
-text-shadow: 0 1px 6px rgba(0,0,0,0.3);
-}
+  .header-text .bismillah {
+    font-family: 'Amiri', serif;
+    font-size: 1.8rem;
+    color: var(--gold-light);
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+  }
 
-.header-text h1 {
-font-family: 'Cairo', sans-serif;
-font-size: 1.55rem;
-font-weight: 800;
-line-height: 1.2;
-text-shadow: 0 2px 8px rgba(0,0,0,0.25);
-letter-spacing: 0.01em;
-}
+  .header-text h1 {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 800;
+    line-height: 1.2;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    letter-spacing: 0.01em;
+  }
 
-.header-text h2 {
-font-family: 'Cairo', sans-serif;
-font-size: 1.05rem;
-font-weight: 600;
-color: var(--orange-pale);
-margin-top: 4px;
-}
+  .header-text h2 {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--orange-pale);
+    margin-top: 4px;
+  }
 
-.header-text .subtitle {
-font-size: 0.88rem;
-color: rgba(255,255,255,0.85);
-margin-top: 3px;
-font-style: italic;
-}
+  .header-text .subtitle {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.85);
+    margin-top: 3px;
+    font-style: italic;
+  }
 
-.ornament-bar {
-text-align: center;
-background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
-color: var(--dark-brown);
-font-size: 1.1rem;
-letter-spacing: 0.5em;
-padding: 4px 0;
-}
+  .ornament-bar {
+    text-align: center;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+    color: var(--dark-brown);
+    font-size: 1.1rem;
+    letter-spacing: 0.5em;
+    padding: 4px 0;
+  }
 
-.container {
-position: relative;
-z-index: 1;
-max-width: 1400px;
-margin: 0 auto;
-padding: 28px 20px 48px;
-}
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 28px 20px 48px;
+  }
 
-.tabs {
-display: flex;
-gap: 4px;
-margin-bottom: 24px;
-background: var(--orange-pale);
-border: 2px solid var(--border);
-border-radius: 12px;
-padding: 6px;
-box-shadow: 0 2px 10px var(--shadow);
-flex-wrap: wrap;
-}
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 24px;
+    background: var(--orange-pale);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 6px;
+    box-shadow: 0 2px 10px var(--shadow);
+    flex-wrap: wrap;
+  }
 
-.tab-btn {
-flex: 1;
-padding: 10px 8px;
-border: none;
-border-radius: 8px;
-background: transparent;
-font-family: 'Cairo', sans-serif;
-font-weight: 700;
-font-size: 0.92rem;
-color: var(--dark-brown);
-cursor: pointer;
-transition: all 0.2s;
-min-width: 140px;
-}
+  .tab-btn {
+    flex: 1;
+    padding: 10px 8px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--dark-brown);
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 140px;
+  }
 
-.tab-btn.active {
-background: linear-gradient(135deg, var(--orange-main), var(--orange-deep));
-color: white;
-box-shadow: 0 2px 10px rgba(180,80,0,0.35);
-}
+  .tab-btn.active {
+    background: linear-gradient(135deg, var(--orange-main), var(--orange-deep));
+    color: white;
+    box-shadow: 0 2px 10px rgba(180,80,0,0.35);
+  }
 
-.tab-btn:hover:not(.active) {
-background: rgba(224,120,32,0.15);
-}
+  .tab-btn:hover:not(.active) {
+    background: rgba(224,120,32,0.15);
+  }
 
-.tab-panel { display: none; }
-.tab-panel.active { display: block; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
 
-.card {
-background: var(--white);
-border: 2px solid var(--border);
-border-radius: 14px;
-padding: 28px;
-box-shadow: 0 4px 20px var(--shadow);
-margin-bottom: 24px;
-position: relative;
-overflow: hidden;
-}
+  .card {
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: 0 4px 20px var(--shadow);
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
 
-.card::before {
-content: '';
-position: absolute;
-top: 0; left: 0; right: 0;
-height: 4px;
-background: linear-gradient(90deg, var(--orange-deep), var(--gold), var(--orange-light));
-}
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--orange-deep), var(--gold), var(--orange-light));
+  }
 
-.card-title {
-font-family: 'Cairo', sans-serif;
-font-size: 1.15rem;
-font-weight: 800;
-color: var(--orange-deep);
-margin-bottom: 20px;
-padding-bottom: 10px;
-border-bottom: 2px dashed var(--orange-pale);
-display: flex;
-align-items: center;
-gap: 8px;
-}
+  .card-title {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--orange-deep);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px dashed var(--orange-pale);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 
-.card-title::before {
-content: '◆';
-color: var(--gold);
-font-size: 0.85rem;
-}
+  .card-title::before {
+    content: '◆';
+    color: var(--gold);
+    font-size: 0.85rem;
+  }
 
-.form-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-gap: 18px;
-}
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+  }
 
-.form-group {
-display: flex;
-flex-direction: column;
-gap: 6px;
-}
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
 
-label {
-font-family: 'Cairo', sans-serif;
-font-weight: 700;
-font-size: 0.84rem;
-color: var(--dark-brown);
-letter-spacing: 0.02em;
-}
+  label {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    font-size: 0.84rem;
+    color: var(--dark-brown);
+    letter-spacing: 0.02em;
+  }
 
-select, input[type="text"], input[type="number"] {
-border: 2px solid var(--border);
-border-radius: 8px;
-padding: 9px 12px;
-font-family: 'Noto Serif', serif;
-font-size: 0.92rem;
-color: var(--text-main);
-background: var(--cream);
-outline: none;
-transition: border-color 0.2s, box-shadow 0.2s;
-}
+  select, input[type="text"], input[type="number"] {
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-family: 'Noto Serif', serif;
+    font-size: 0.92rem;
+    color: var(--text-main);
+    background: var(--cream);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
 
-select:focus, input:focus {
-border-color: var(--orange-main);
-box-shadow: 0 0 0 3px rgba(224,120,32,0.18);
-}
+  select:focus, input:focus {
+    border-color: var(--orange-main);
+    box-shadow: 0 0 0 3px rgba(224,120,32,0.18);
+  }
 
-.scoring-table {
-width: 100%;
-border-collapse: collapse;
-font-size: 0.9rem;
-margin-top: 8px;
-}
+  .scoring-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin-top: 8px;
+  }
 
-.scoring-table th {
-background: linear-gradient(135deg, var(--orange-deep), var(--orange-main));
-color: white;
-font-family: 'Cairo', sans-serif;
-font-weight: 700;
-padding: 10px 14px;
-text-align: left;
-font-size: 0.88rem;
-}
+  .scoring-table th {
+    background: linear-gradient(135deg, var(--orange-deep), var(--orange-main));
+    color: white;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 0.88rem;
+  }
 
-.scoring-table th:first-child { border-radius: 8px 0 0 0; }
-.scoring-table th:last-child { border-radius: 0 8px 0 0; }
+  .scoring-table th:first-child { border-radius: 8px 0 0 0; }
+  .scoring-table th:last-child  { border-radius: 0 8px 0 0; }
 
-.scoring-table td {
-padding: 9px 14px;
-border-bottom: 1px solid var(--orange-pale);
-vertical-align: middle;
-}
+  .scoring-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--orange-pale);
+    vertical-align: middle;
+  }
 
-.scoring-table tr:hover td { background: rgba(245,163,64,0.08); }
+  .scoring-table tr:hover td { background: rgba(245,163,64,0.08); }
 
-.scoring-table input[type="number"] {
-width: 90px;
-padding: 6px 10px;
-text-align: center;
-font-size: 0.95rem;
-}
+  .scoring-table input[type="number"] {
+    width: 90px;
+    padding: 6px 10px;
+    text-align: center;
+    font-size: 0.95rem;
+  }
 
-.bidang-name {
-font-weight: 600;
-color: var(--dark-brown);
-}
+  .bidang-name {
+    font-weight: 600;
+    color: var(--dark-brown);
+  }
 
-.btn {
-display: inline-flex;
-align-items: center;
-gap: 7px;
-padding: 10px 22px;
-border: none;
-border-radius: 9px;
-font-family: 'Cairo', sans-serif;
-font-weight: 700;
-font-size: 0.92rem;
-cursor: pointer;
-transition: all 0.2s;
-}
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 9px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
 
-.btn-primary {
-background: linear-gradient(135deg, var(--orange-deep), var(--orange-main));
-color: white;
-box-shadow: 0 3px 12px rgba(180,80,0,0.3);
-}
+  .btn-primary {
+    background: linear-gradient(135deg, var(--orange-deep), var(--orange-main));
+    color: white;
+    box-shadow: 0 3px 12px rgba(180,80,0,0.3);
+  }
 
-.btn-primary:hover {
-transform: translateY(-1px);
-box-shadow: 0 5px 18px rgba(180,80,0,0.4);
-}
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 18px rgba(180,80,0,0.4);
+  }
 
-.btn-success {
-background: linear-gradient(135deg, #2e7d32, #43a047);
-color: white;
-box-shadow: 0 3px 12px rgba(46,125,50,0.3);
-}
+  .btn-success {
+    background: linear-gradient(135deg, #2e7d32, #43a047);
+    color: white;
+    box-shadow: 0 3px 12px rgba(46,125,50,0.3);
+  }
 
-.btn-success:hover { transform: translateY(-1px); }
+  .btn-success:hover { transform: translateY(-1px); }
 
-.btn-gold {
-background: linear-gradient(135deg, var(--gold), var(--gold-light));
-color: var(--dark);
-box-shadow: 0 3px 12px rgba(212,160,23,0.3);
-}
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--dark);
+    box-shadow: 0 3px 12px rgba(212,160,23,0.3);
+  }
 
-.btn-gold:hover { transform: translateY(-1px); }
+  .btn-gold:hover { transform: translateY(-1px); }
 
-.btn-danger {
-background: linear-gradient(135deg, #b71c1c, #e53935);
-color: white;
-box-shadow: 0 3px 10px rgba(183,28,28,0.25);
-}
+  .btn-danger {
+    background: linear-gradient(135deg, #b71c1c, #e53935);
+    color: white;
+    box-shadow: 0 3px 10px rgba(183,28,28,0.25);
+  }
 
-.btn-actions {
-display: flex;
-gap: 12px;
-flex-wrap: wrap;
-margin-top: 20px;
-}
+  .btn-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
 
-#rekap-container, #rekap-akhir-container {
-overflow-x: auto;
-border-radius: 10px;
-border: 2px solid var(--border);
-box-shadow: 0 3px 14px var(--shadow);
-}
+  #rekap-container, #rekap-akhir-container {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    box-shadow: 0 3px 14px var(--shadow);
+  }
 
-#rekap-table, #rekap-akhir-table {
-width: 100%;
-border-collapse: collapse;
-font-size: 0.82rem;
-min-width: 900px;
-}
+  #rekap-table, #rekap-akhir-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    min-width: 900px;
+  }
 
-#rekap-table thead tr:first-child th,
-#rekap-akhir-table thead tr:first-child th {
-background: linear-gradient(135deg, var(--orange-deep), var(--orange-main));
-color: white;
-font-family: 'Cairo', sans-serif;
-font-weight: 700;
-padding: 10px 10px;
-text-align: center;
-font-size: 0.84rem;
-border: 1px solid rgba(255,255,255,0.2);
-}
+  #rekap-table thead tr:first-child th,
+  #rekap-akhir-table thead tr:first-child th {
+    background: linear-gradient(135deg, var(--orange-deep), var(--orange-main));
+    color: white;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    padding: 10px 10px;
+    text-align: center;
+    font-size: 0.84rem;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
 
-#rekap-table thead tr:nth-child(2) th,
-#rekap-akhir-table thead tr:nth-child(2) th {
-background: var(--orange-light);
-color: var(--dark);
-font-family: 'Cairo', sans-serif;
-font-weight: 700;
-padding: 7px 10px;
-font-size: 0.78rem;
-border: 1px solid var(--border);
-text-align: center;
-}
+  #rekap-table thead tr:nth-child(2) th,
+  #rekap-akhir-table thead tr:nth-child(2) th {
+    background: var(--orange-light);
+    color: var(--dark);
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    padding: 7px 10px;
+    font-size: 0.78rem;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
 
-#rekap-table tbody td,
-#rekap-akhir-table tbody td {
-padding: 8px 10px;
-border: 1px solid rgba(212,129,58,0.3);
-text-align: center;
-vertical-align: middle;
-}
+  #rekap-table tbody td,
+  #rekap-akhir-table tbody td {
+    padding: 8px 10px;
+    border: 1px solid rgba(212,129,58,0.3);
+    text-align: center;
+    vertical-align: middle;
+  }
 
-#rekap-table tbody tr:nth-child(even) td,
-#rekap-akhir-table tbody tr:nth-child(even) td { background: var(--orange-pale); }
+  #rekap-table tbody tr:nth-child(even) td,
+  #rekap-akhir-table tbody tr:nth-child(even) td { background: var(--orange-pale); }
 
-#rekap-table tbody tr:hover td,
-#rekap-akhir-table tbody tr:hover td { background: rgba(224,120,32,0.14); }
+  #rekap-table tbody tr:hover td,
+  #rekap-akhir-table tbody tr:hover td { background: rgba(224,120,32,0.14); }
 
-.rank-badge {
-display: inline-flex;
-align-items: center; justify-content: center;
-width: 28px; height: 28px;
-border-radius: 50%;
-font-family: 'Cairo', sans-serif;
-font-weight: 800;
-font-size: 0.78rem;
-}
+  .rank-badge {
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 800;
+    font-size: 0.78rem;
+  }
 
-.rank-1 { background: var(--gold); color: var(--dark); }
-.rank-2 { background: #B0BEC5; color: var(--dark); }
-.rank-3 { background: #CD7F32; color: white; }
-.rank-other { background: var(--orange-pale); color: var(--dark-brown); border: 1px solid var(--border); }
+  .rank-1 { background: var(--gold); color: var(--dark); }
+  .rank-2 { background: #B0BEC5; color: var(--dark); }
+  .rank-3 { background: #CD7F32; color: white; }
+  .rank-other { background: var(--orange-pale); color: var(--dark-brown); border: 1px solid var(--border); }
 
-.total-cell {
-font-family: 'Cairo', sans-serif;
-font-weight: 800;
-color: var(--orange-deep);
-font-size: 0.92rem;
-}
+  .total-cell {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 800;
+    color: var(--orange-deep);
+    font-size: 0.92rem;
+  }
 
-.gabungan-cell {
-font-family: 'Cairo', sans-serif;
-font-weight: 800;
-color: #2e7d32;
-font-size: 0.95rem;
-background: rgba(46, 125, 50, 0.1);
-}
+  .gabungan-cell {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 800;
+    color: #2e7d32;
+    font-size: 0.95rem;
+    background: rgba(46, 125, 50, 0.1);
+  }
 
-.empty-rekap {
-text-align: center;
-padding: 40px;
-color: #999;
-font-style: italic;
-font-size: 0.95rem;
-}
+  .empty-rekap {
+    text-align: center;
+    padding: 40px;
+    color: #999;
+    font-style: italic;
+    font-size: 0.95rem;
+  }
 
-.filter-row {
-display: flex;
-gap: 14px;
-flex-wrap: wrap;
-margin-bottom: 18px;
-align-items: flex-end;
-}
+  .filter-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+    align-items: flex-end;
+  }
 
-.filter-row .form-group { min-width: 180px; }
+  .filter-row .form-group { min-width: 180px; }
 
-.ornament-footer {
-text-align: center;
-margin-top: 40px;
-color: var(--orange-main);
-font-size: 1.6rem;
-letter-spacing: 0.3em;
-opacity: 0.5;
-}
+  .ornament-footer {
+    text-align: center;
+    margin-top: 40px;
+    color: var(--orange-main);
+    font-size: 1.6rem;
+    letter-spacing: 0.3em;
+    opacity: 0.5;
+  }
 
-#toast {
-position: fixed;
-bottom: 28px; right: 28px;
-background: linear-gradient(135deg, var(--orange-deep), var(--orange-main));
-color: white;
-padding: 12px 22px;
-border-radius: 10px;
-font-family: 'Cairo', sans-serif;
-font-weight: 700;
-font-size: 0.9rem;
-box-shadow: 0 4px 18px rgba(0,0,0,0.25);
-z-index: 9999;
-opacity: 0;
-transform: translateY(20px);
-transition: all 0.3s;
-pointer-events: none;
-}
-#toast.show { opacity: 1; transform: translateY(0); }
+  #toast {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    background: linear-gradient(135deg, var(--orange-deep), var(--orange-main));
+    color: white;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s;
+    pointer-events: none;
+  }
+  #toast.show { opacity: 1; transform: translateY(0); }
 
-@media (max-width: 700px) {
-.header-inner { flex-direction: column; align-items: center; gap: 14px; }
-.header-text h1 { font-size: 1.15rem; }
-.tabs { flex-direction: column; }
-.form-grid { grid-template-columns: 1fr; }
-}
+  /* Modal Konfirmasi */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+
+  .modal-box {
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    max-width: 420px;
+    width: 90%;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    text-align: center;
+  }
+
+  .modal-box h3 {
+    font-family: 'Cairo', sans-serif;
+    color: var(--orange-deep);
+    margin-bottom: 12px;
+  }
+
+  .modal-box p {
+    color: var(--dark-brown);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  @media (max-width: 700px) {
+    .header-inner { flex-direction: column; align-items: center; gap: 14px; }
+    .header-text h1 { font-size: 1.15rem; }
+    .tabs { flex-direction: column; }
+    .form-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
 
-<header>
 <!-- ══ HEADER ══ -->
 <header>
 <div class="header-inner">
@@ -520,694 +558,834 @@ pointer-events: none;
          style="width: 85px; height: 85px; object-fit: contain; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4)); transition: transform 0.3s ease;"
          onmouseover="this.style.transform='scale(1.1)'" 
          onmouseout="this.style.transform='scale(1)'">
-
 </header>
 
 <div class="container">
 
-<div class="tabs">
-<button class="tab-btn active" onclick="switchTab('input', this)">✏️ Input Nilai Dewan Hakim</button>
-<button class="tab-btn" onclick="switchTab('rekap', this)">📊 Rekapitulasi Gabungan</button>
-<button class="tab-btn" onclick="switchTab('rekap-akhir', this)">🏆 Rekap Akhir</button>
-</div>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('input', this)">✏️ Input Nilai Dewan Hakim</button>
+    <button class="tab-btn" onclick="switchTab('rekap', this)">📊 Rekapitulasi Gabungan</button>
+    <button class="tab-btn" onclick="switchTab('rekap-akhir', this)">🏆 Rekap Akhir</button>
+  </div>
 
-<!-- TAB INPUT -->
-<div id="tab-input" class="tab-panel active">
-<div class="card">
-<div class="card-title">Form Input Nilai Dewan Hakim</div>
+  <!-- TAB INPUT -->
+  <div id="tab-input" class="tab-panel active">
+    <div class="card">
+      <div class="card-title">Form Input Nilai Dewan Hakim</div>
 
-<div class="form-grid">
-<div class="form-group">
-<label>Nomor Peserta</label>
-<input type="text" id="noPeserta" placeholder="Contoh: 001">
-</div>
-<div class="form-group">
-<label>Jenis Cabang</label>
-<select id="cabang" onchange="updateGolongan()">
-<option value="">-- Pilih Cabang --</option>
-<option value="Tilawah">Tilawah</option>
-<option value="Tartil">Tartil</option>
-<option value="Hifdzil">Hifdzil</option>
-<option value="Syarhil">Syarhil</option>
-</select>
-</div>
-<div class="form-group">
-<label>Golongan</label>
-<select id="golongan" onchange="updateBidang()">
-<option value="">-- Pilih Golongan --</option>
-</select>
-</div>
-<div class="form-group">
-<label>Nama Dewan Hakim</label>
-<input type="text" id="namaHakim" placeholder="Tulis nama hakim...">
-</div>
-<div class="form-group">
-<label>Bidang Penilaian</label>
-<select id="bidangPenilaian">
-<option value="">-- Pilih Bidang --</option>
-</select>
-</div>
-<div class="form-group">
-<label>Nilai (Maks. 100)</label>
-<input type="number" id="nilaiInput" min="0" max="100" placeholder="0 - 100">
-</div>
-</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nomor Peserta</label>
+          <input type="text" id="noPeserta" placeholder="Contoh: 001">
+        </div>
+        <div class="form-group">
+          <label>Jenis Cabang</label>
+          <select id="cabang" onchange="updateGolongan()">
+            <option value="">-- Pilih Cabang --</option>
+            <option value="Tilawah">Tilawah</option>
+            <option value="Tartil">Tartil</option>
+            <option value="Hifdzil">Hifdzil</option>
+            <option value="Syarhil">Syarhil</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Golongan</label>
+          <select id="golongan" onchange="updateBidang()">
+            <option value="">-- Pilih Golongan --</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Nama Dewan Hakim</label>
+          <input type="text" id="namaHakim" placeholder="Tulis nama hakim...">
+        </div>
+        <div class="form-group">
+          <label>Bidang Penilaian</label>
+          <select id="bidangPenilaian">
+            <option value="">-- Pilih Bidang --</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Nilai (Maks. 100)</label>
+          <input type="number" id="nilaiInput" min="0" max="100" placeholder="0 - 100">
+        </div>
+      </div>
 
-<div class="btn-actions">
-<button class="btn btn-primary" onclick="tambahNilai()">➕ Tambah Nilai</button>
-<button class="btn btn-danger" onclick="resetForm()">🗑 Reset Form</button>
-</div>
-</div>
+      <div class="btn-actions">
+        <button class="btn btn-primary" onclick="tambahNilai()">➕ Tambah Nilai</button>
+        <button class="btn btn-danger" onclick="konfirmasiResetForm()">🗑 Reset Form</button>
+      </div>
+    </div>
 
-<div class="card">
-<div class="card-title">Data Nilai Belum Direkap</div>
-<div style="overflow-x:auto">
-<table class="scoring-table" id="inputTable">
-<thead>
-<tr>
-<th>#</th>
-<th>No. Peserta</th>
-<th>Cabang</th>
-<th>Golongan</th>
-<th>Bidang Penilaian</th>
-<th>Nama Hakim</th>
-<th>Nilai</th>
-<th>Aksi</th>
-</tr>
-</thead>
-<tbody id="inputTableBody">
-<tr><td colspan="8" style="text-align:center;color:#aaa;padding:20px;font-style:italic;">Belum ada data. Silakan input nilai di atas.</td></tr>
-</tbody>
-</table>
-</div>
-<div class="btn-actions">
-<button class="btn btn-gold" onclick="simpanKeRekap()">💾 Simpan & Rekap Nilai</button>
-</div>
-</div>
-</div>
+    <div class="card">
+      <div class="card-title">Data Nilai Belum Direkap</div>
+      <div style="overflow-x:auto">
+        <table class="scoring-table" id="inputTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>No. Peserta</th>
+              <th>Cabang</th>
+              <th>Golongan</th>
+              <th>Bidang Penilaian</th>
+              <th>Nama Hakim</th>
+              <th>Nilai</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="inputTableBody">
+            <tr><td colspan="8" style="text-align:center;color:#aaa;padding:20px;font-style:italic;">Belum ada data. Silakan input nilai di atas.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="btn-actions">
+        <button class="btn btn-gold" onclick="simpanKeRekap()">💾 Simpan & Rekap Nilai</button>
+        <button class="btn btn-danger" onclick="konfirmasiHapusSemuaData()">🗑️ Hapus Semua Data Tersimpan</button>
+      </div>
+    </div>
+  </div>
 
-<!-- TAB REKAP -->
-<div id="tab-rekap" class="tab-panel">
-<div class="card">
-<div class="card-title">Filter Rekapitulasi Gabungan</div>
-<div class="filter-row">
-<div class="form-group">
-<label>Filter Cabang</label>
-<select id="filterCabang" onchange="updateFilterGolongan(); renderRekap();">
-<option value="">Semua Cabang</option>
-<option value="Tilawah">Tilawah</option>
-<option value="Tartil">Tartil</option>
-<option value="Hifdzil">Hifdzil</option>
-<option value="Syarhil">Syarhil</option>
-</select>
-</div>
-<div class="form-group">
-<label>Filter Golongan</label>
-<select id="filterGolongan" onchange="renderRekap()">
-<option value="">Semua Golongan</option>
-</select>
-</div>
-<div style="display:flex;gap:10px;align-items:flex-end">
-<button class="btn btn-success" onclick="exportExcelRekap()">📥 Unduh Excel</button>
-<button class="btn btn-gold" onclick="renderRekap()">🔄 Refresh</button>
-</div>
-</div>
-</div>
+  <!-- TAB REKAP -->
+  <div id="tab-rekap" class="tab-panel">
+    <div class="card">
+      <div class="card-title">Filter Rekapitulasi Gabungan</div>
+      <div class="filter-row">
+        <div class="form-group">
+          <label>Filter Cabang</label>
+          <select id="filterCabang" onchange="updateFilterGolongan(); renderRekap();">
+            <option value="">Semua Cabang</option>
+            <option value="Tilawah">Tilawah</option>
+            <option value="Tartil">Tartil</option>
+            <option value="Hifdzil">Hifdzil</option>
+            <option value="Syarhil">Syarhil</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Filter Golongan</label>
+          <select id="filterGolongan" onchange="renderRekap()">
+            <option value="">Semua Golongan</option>
+          </select>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-end">
+          <button class="btn btn-success" onclick="exportExcelRekap()">📥 Unduh Excel</button>
+          <button class="btn btn-gold" onclick="renderRekap()">🔄 Refresh</button>
+        </div>
+      </div>
+    </div>
 
-<div class="card">
-<div class="card-title">Tabel Rekapitulasi Nilai Gabungan (Rata-rata 2 Hakim)</div>
-<div id="rekap-container">
-<div class="empty-rekap">Belum ada data rekapitulasi. Silakan input dan simpan nilai terlebih dahulu.</div>
-</div>
-</div>
-</div>
+    <div class="card">
+      <div class="card-title">Tabel Rekapitulasi Nilai Gabungan (Rata-rata 2 Hakim)</div>
+      <div id="rekap-container">
+        <div class="empty-rekap">Belum ada data rekapitulasi. Silakan input dan simpan nilai terlebih dahulu.</div>
+      </div>
+    </div>
+  </div>
 
-<!-- TAB REKAP AKHIR -->
-<div id="tab-rekap-akhir" class="tab-panel">
-<div class="card">
-<div class="card-title">Filter Rekap Akhir</div>
-<div class="filter-row">
-<div class="form-group">
-<label>Filter Cabang</label>
-<select id="filterCabangAkhir" onchange="updateFilterGolonganAkhir(); renderRekapAkhir();">
-<option value="">Semua Cabang</option>
-<option value="Tilawah">Tilawah</option>
-<option value="Tartil">Tartil</option>
-<option value="Hifdzil">Hifdzil</option>
-<option value="Syarhil">Syarhil</option>
-</select>
-</div>
-<div class="form-group">
-<label>Filter Golongan</label>
-<select id="filterGolonganAkhir" onchange="renderRekapAkhir()">
-<option value="">Semua Golongan</option>
-</select>
-</div>
-<div style="display:flex;gap:10px;align-items:flex-end">
-<button class="btn btn-success" onclick="exportExcelAkhir()">📥 Unduh Excel</button>
-<button class="btn btn-gold" onclick="renderRekapAkhir()">🔄 Refresh</button>
-</div>
-</div>
-</div>
+  <!-- TAB REKAP AKHIR -->
+  <div id="tab-rekap-akhir" class="tab-panel">
+    <div class="card">
+      <div class="card-title">Filter Rekap Akhir</div>
+      <div class="filter-row">
+        <div class="form-group">
+          <label>Filter Cabang</label>
+          <select id="filterCabangAkhir" onchange="updateFilterGolonganAkhir(); renderRekapAkhir();">
+            <option value="">Semua Cabang</option>
+            <option value="Tilawah">Tilawah</option>
+            <option value="Tartil">Tartil</option>
+            <option value="Hifdzil">Hifdzil</option>
+            <option value="Syarhil">Syarhil</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Filter Golongan</label>
+          <select id="filterGolonganAkhir" onchange="renderRekapAkhir()">
+            <option value="">Semua Golongan</option>
+          </select>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-end">
+          <button class="btn btn-success" onclick="exportExcelAkhir()">📥 Unduh Excel</button>
+          <button class="btn btn-gold" onclick="renderRekapAkhir()">🔄 Refresh</button>
+        </div>
+      </div>
+    </div>
 
-<div class="card">
-<div class="card-title">Tabel Rekap Akhir - Total Nilai Gabungan Semua Bidang</div>
-<div id="rekap-akhir-container">
-<div class="empty-rekap">Belum ada data rekapitulasi. Silakan input dan simpan nilai terlebih dahulu.</div>
-</div>
-</div>
-</div>
+    <div class="card">
+      <div class="card-title">Tabel Rekap Akhir - Total Nilai Gabungan Semua Bidang</div>
+      <div id="rekap-akhir-container">
+        <div class="empty-rekap">Belum ada data rekapitulasi. Silakan input dan simpan nilai terlebih dahulu.</div>
+      </div>
+    </div>
+  </div>
 
-<div class="ornament-footer">❧ &nbsp; ✾ &nbsp; ❧ &nbsp; ✾ &nbsp; ❧ &nbsp; ✾ &nbsp; ❧</div>
+  <div class="ornament-footer">❧ &nbsp; ✾ &nbsp; ❧ &nbsp; ✾ &nbsp; ❧ &nbsp; ✾ &nbsp; ❧</div>
 </div>
 
 <div id="toast"></div>
 
+<!-- Modal Konfirmasi -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <h3 id="modalTitle">Konfirmasi</h3>
+    <p id="modalMessage">Apakah Anda yakin?</p>
+    <div class="modal-actions">
+      <button class="btn btn-primary" onclick="modalConfirm()">✅ Ya</button>
+      <button class="btn btn-danger" onclick="modalCancel()">❌ Batal</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ════════════════════════════════════════
-// DATA DEFINITIONS
+//   DATA DEFINITIONS
 // ════════════════════════════════════════
 const GOLONGAN_MAP = {
-Tilawah: ['Dewasa', 'Remaja', 'Anak-anak', 'HQ 1 Juz', 'HQ 5 Juz'],
-Tartil: ['Murattal'],
-Hifdzil: ['1 Juz', '5 Juz', '10 Juz', '20 Juz', '30 Juz'],
-Syarhil: ['Syarhil']
+  Tilawah: ['Dewasa', 'Remaja', 'Anak-anak', 'HQ 1 Juz', 'HQ 5 Juz'],
+  Tartil:  ['Murattal'],
+  Hifdzil: ['1 Juz', '5 Juz', '10 Juz', '20 Juz', '30 Juz'],
+  Syarhil: ['Syarhil']
 };
 
 const BIDANG_MAP = {
-Tilawah: {
-'Dewasa': ['Suara', 'Tajwid', 'Fashahah', 'Lagu', 'Irama dan Suara'],
-'Remaja': ['Suara', 'Tajwid', 'Fashahah', 'Lagu', 'Irama dan Suara'],
-'Anak-anak': ['Suara', 'Tajwid', 'Fashahah', 'Lagu', 'Irama dan Suara'],
-'HQ 1 Juz': ['Suara', 'Tajwid', 'Fashahah', 'Lagu', 'Irama dan Suara'],
-'HQ 5 Juz': ['Suara', 'Tajwid', 'Fashahah', 'Lagu', 'Irama dan Suara'],
-},
-Tartil: {
-'Murattal': ['Tajwid', 'Fashahah', 'Tilawah'],
-},
-Hifdzil: {
-'1 Juz': ['Tahfidz', 'Tajwid', 'Fashahah'],
-'5 Juz': ['Tahfidz', 'Tajwid', 'Fashahah'],
-'10 Juz': ['Tahfidz', 'Tajwid', 'Fashahah'],
-'20 Juz': ['Tahfidz', 'Tajwid', 'Fashahah'],
-'30 Juz': ['Tahfidz', 'Tajwid', 'Fashahah'],
-},
-Syarhil: {
-'Syarhil': ['Terjemah dan Materi', 'Penghayatan dan Retorika', 'Tilawah'],
-}
+  Tilawah: {
+    'Dewasa':    ['Suara', 'Tajwid', 'Fashahah', 'Lagu', 'Irama dan Suara'],
+    'Remaja':    ['Suara', 'Tajwid', 'Fashahah', 'Lagu', 'Irama dan Suara'],
+    'Anak-anak': ['Suara', 'Tajwid', 'Fashahah', 'Lagu', 'Irama dan Suara'],
+    'HQ 1 Juz':  ['Suara', 'Tajwid', 'Fashahah', 'Lagu', 'Irama dan Suara'],
+    'HQ 5 Juz':  ['Suara', 'Tajwid', 'Fashahah', 'Lagu', 'Irama dan Suara'],
+  },
+  Tartil: {
+    'Murattal': ['Tajwid', 'Fashahah', 'Tilawah'],
+  },
+  Hifdzil: {
+    '1 Juz':  ['Tahfidz', 'Tajwid', 'Fashahah'],
+    '5 Juz':  ['Tahfidz', 'Tajwid', 'Fashahah'],
+    '10 Juz': ['Tahfidz', 'Tajwid', 'Fashahah'],
+    '20 Juz': ['Tahfidz', 'Tajwid', 'Fashahah'],
+    '30 Juz': ['Tahfidz', 'Tajwid', 'Fashahah'],
+  },
+  Syarhil: {
+    'Syarhil': ['Terjemah dan Materi', 'Penghayatan dan Retorika', 'Tilawah'],
+  }
 };
 
 let inputRows = [];
 let rekapData = [];
 
 // ════════════════════════════════════════
-// HELPER: Populate Select Options using add()
+//   LOCALSTORAGE PERSISTENCE
+// ════════════════════════════════════════
+const STORAGE_KEY = 'mtq_xii_2026_rekapData';
+
+function saveToStorage() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(rekapData));
+    console.log('Data tersimpan ke localStorage:', rekapData.length, 'baris');
+  } catch (e) {
+    console.error('Gagal menyimpan ke localStorage:', e);
+  }
+}
+
+function loadFromStorage() {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      rekapData = JSON.parse(stored);
+      console.log('Data dimuat dari localStorage:', rekapData.length, 'baris');
+      return true;
+    }
+  } catch (e) {
+    console.error('Gagal memuat dari localStorage:', e);
+  }
+  return false;
+}
+
+function clearStorage() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+    console.log('localStorage dihapus');
+  } catch (e) {
+    console.error('Gagal menghapus localStorage:', e);
+  }
+}
+
+// ════════════════════════════════════════
+//   MODAL KONFIRMASI
+// ════════════════════════════════════════
+let modalCallback = null;
+
+function showModal(title, message, onConfirm) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalMessage').textContent = message;
+  modalCallback = onConfirm;
+  document.getElementById('modalOverlay').classList.add('active');
+}
+
+function modalConfirm() {
+  document.getElementById('modalOverlay').classList.remove('active');
+  if (modalCallback) modalCallback();
+  modalCallback = null;
+}
+
+function modalCancel() {
+  document.getElementById('modalOverlay').classList.remove('active');
+  modalCallback = null;
+}
+
+// ════════════════════════════════════════
+//   HELPER: Populate Select Options
 // ════════════════════════════════════════
 function populateSelect(selectId, options, defaultText, defaultValue) {
-const select = document.getElementById(selectId);
-if (!select) {
-console.error('Select element not found:', selectId);
-return;
-}
+  const select = document.getElementById(selectId);
+  if (!select) return;
 
-// Clear existing options
-while (select.options.length > 0) {
-select.remove(0);
-}
+  while (select.options.length > 0) {
+    select.remove(0);
+  }
 
-// Add default option
-const defaultOpt = document.createElement('option');
-defaultOpt.value = defaultValue || '';
-defaultOpt.textContent = defaultText;
-select.add(defaultOpt);
+  const defaultOpt = document.createElement('option');
+  defaultOpt.value = defaultValue || '';
+  defaultOpt.textContent = defaultText;
+  select.add(defaultOpt);
 
-// Add options
-options.forEach(opt => {
-const option = document.createElement('option');
-option.value = opt;
-option.textContent = opt;
-select.add(option);
-});
-
-console.log('Populated', selectId, 'with', options.length, 'options');
+  options.forEach(opt => {
+    const option = document.createElement('option');
+    option.value = opt;
+    option.textContent = opt;
+    select.add(option);
+  });
 }
 
 // ════════════════════════════════════════
-// FORM LOGIC
+//   FORM LOGIC
 // ════════════════════════════════════════
 function updateGolongan() {
-const cabang = document.getElementById('cabang').value;
-const golonganList = GOLONGAN_MAP[cabang] || [];
-
-populateSelect('golongan', golonganList, '-- Pilih Golongan --');
-populateSelect('bidangPenilaian', [], '-- Pilih Bidang --');
+  const cabang = document.getElementById('cabang').value;
+  const golonganList = GOLONGAN_MAP[cabang] || [];
+  populateSelect('golongan', golonganList, '-- Pilih Golongan --');
+  populateSelect('bidangPenilaian', [], '-- Pilih Bidang --');
 }
 
 function updateBidang() {
-const cabang = document.getElementById('cabang').value;
-const golongan = document.getElementById('golongan').value;
-const bidangList = (BIDANG_MAP[cabang] || {})[golongan] || [];
-
-populateSelect('bidangPenilaian', bidangList, '-- Pilih Bidang --');
+  const cabang = document.getElementById('cabang').value;
+  const golongan = document.getElementById('golongan').value;
+  const bidangList = (BIDANG_MAP[cabang] || {})[golongan] || [];
+  populateSelect('bidangPenilaian', bidangList, '-- Pilih Bidang --');
 }
 
 function updateFilterGolongan() {
-const cabang = document.getElementById('filterCabang').value;
-const golonganList = GOLONGAN_MAP[cabang] || [];
-
-populateSelect('filterGolongan', golonganList, 'Semua Golongan');
+  const cabang = document.getElementById('filterCabang').value;
+  const golonganList = GOLONGAN_MAP[cabang] || [];
+  populateSelect('filterGolongan', golonganList, 'Semua Golongan');
 }
 
 function updateFilterGolonganAkhir() {
-const cabang = document.getElementById('filterCabangAkhir').value;
-const golonganList = GOLONGAN_MAP[cabang] || [];
-
-populateSelect('filterGolonganAkhir', golonganList, 'Semua Golongan');
+  const cabang = document.getElementById('filterCabangAkhir').value;
+  const golonganList = GOLONGAN_MAP[cabang] || [];
+  populateSelect('filterGolonganAkhir', golonganList, 'Semua Golongan');
 }
 
 function tambahNilai() {
-const noPeserta = document.getElementById('noPeserta').value.trim();
-const cabang = document.getElementById('cabang').value;
-const golongan = document.getElementById('golongan').value;
-const hakim = document.getElementById('namaHakim').value.trim();
-const bidang = document.getElementById('bidangPenilaian').value;
-const nilai = parseFloat(document.getElementById('nilaiInput').value);
+  const noPeserta = document.getElementById('noPeserta').value.trim();
+  const cabang    = document.getElementById('cabang').value;
+  const golongan  = document.getElementById('golongan').value;
+  const hakim     = document.getElementById('namaHakim').value.trim();
+  const bidang    = document.getElementById('bidangPenilaian').value;
+  const nilai     = parseFloat(document.getElementById('nilaiInput').value);
 
-if (!noPeserta || !cabang || !golongan || !hakim || !bidang || isNaN(nilai)) {
-showToast('⚠ Harap lengkapi semua kolom!');
-return;
-}
-if (nilai < 0 || nilai > 100) {
-showToast('⚠ Nilai harus antara 0 - 100!');
-return;
-}
+  if (!noPeserta || !cabang || !golongan || !hakim || !bidang || isNaN(nilai)) {
+    showToast('⚠ Harap lengkapi semua kolom!');
+    return;
+  }
+  if (nilai < 0 || nilai > 100) {
+    showToast('⚠ Nilai harus antara 0 - 100!');
+    return;
+  }
 
-inputRows.push({ noPeserta, cabang, golongan, hakim, bidang, nilai });
-renderInputTable();
-document.getElementById('nilaiInput').value = '';
-showToast('✅ Nilai berhasil ditambahkan!');
+  inputRows.push({ noPeserta, cabang, golongan, hakim, bidang, nilai });
+  renderInputTable();
+  document.getElementById('nilaiInput').value = '';
+  showToast('✅ Nilai berhasil ditambahkan!');
 }
 
 function hapusInputRow(idx) {
-inputRows.splice(idx, 1);
-renderInputTable();
+  inputRows.splice(idx, 1);
+  renderInputTable();
 }
 
 function resetForm() {
-document.getElementById('noPeserta').value = '';
-document.getElementById('cabang').value = '';
-populateSelect('golongan', [], '-- Pilih Golongan --');
-populateSelect('bidangPenilaian', [], '-- Pilih Bidang --');
-document.getElementById('namaHakim').value = '';
-document.getElementById('nilaiInput').value = '';
-inputRows = [];
-renderInputTable();
+  document.getElementById('noPeserta').value = '';
+  document.getElementById('cabang').value = '';
+  populateSelect('golongan', [], '-- Pilih Golongan --');
+  populateSelect('bidangPenilaian', [], '-- Pilih Bidang --');
+  document.getElementById('namaHakim').value = '';
+  document.getElementById('nilaiInput').value = '';
+  inputRows = [];
+  renderInputTable();
+}
+
+function konfirmasiResetForm() {
+  if (!inputRows.length) {
+    showToast('ℹ️ Form sudah kosong.');
+    return;
+  }
+  showModal(
+    '🗑️ Konfirmasi Reset Form',
+    'Apakah Anda yakin ingin menghapus semua data di form input? Data yang belum disimpan akan hilang.',
+    function() {
+      resetForm();
+      showToast('✅ Form berhasil direset!');
+    }
+  );
+}
+
+function konfirmasiHapusSemuaData() {
+  if (!rekapData.length) {
+    showToast('ℹ️ Tidak ada data tersimpan untuk dihapus.');
+    return;
+  }
+  showModal(
+    '🗑️ Konfirmasi Hapus Semua Data',
+    'PERHATIAN: Semua data rekapitulasi yang tersimpan akan dihapus permanen. Apakah Anda yakin?',
+    function() {
+      rekapData = [];
+      clearStorage();
+      renderInputTable();
+      renderRekap();
+      renderRekapAkhir();
+      showToast('✅ Semua data berhasil dihapus!');
+    }
+  );
 }
 
 function renderInputTable() {
-const tbody = document.getElementById('inputTableBody');
-if (!inputRows.length) {
-tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:#aaa;padding:20px;font-style:italic;">Belum ada data. Silakan input nilai di atas.</td></tr>`;
-return;
-}
-tbody.innerHTML = inputRows.map((r, i) => `
-<tr>
-<td>${i+1}</td>
-<td><strong>${r.noPeserta}</strong></td>
-<td>${r.cabang}</td>
-<td>${r.golongan}</td>
-<td class="bidang-name">${r.bidang}</td>
-<td>${r.hakim}</td>
-<td><strong style="color:var(--orange-deep)">${r.nilai}</strong></td>
-<td><button class="btn btn-danger" style="padding:4px 10px;font-size:0.78rem" onclick="hapusInputRow(${i})">✕</button></td>
-</tr>
-`).join('');
+  const tbody = document.getElementById('inputTableBody');
+  if (!inputRows.length) {
+    tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:#aaa;padding:20px;font-style:italic;">Belum ada data. Silakan input nilai di atas.</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = inputRows.map((r, i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td><strong>${r.noPeserta}</strong></td>
+      <td>${r.cabang}</td>
+      <td>${r.golongan}</td>
+      <td class="bidang-name">${r.bidang}</td>
+      <td>${r.hakim}</td>
+      <td><strong style="color:var(--orange-deep)">${r.nilai}</strong></td>
+      <td><button class="btn btn-danger" style="padding:4px 10px;font-size:0.78rem" onclick="hapusInputRow(${i})">✕</button></td>
+    </tr>
+  `).join('');
 }
 
 // ════════════════════════════════════════
-// SAVE TO REKAP
+//   SAVE TO REKAP
 // ════════════════════════════════════════
 function simpanKeRekap() {
-if (!inputRows.length) { showToast('⚠ Tidak ada data untuk disimpan!'); return; }
-rekapData = rekapData.concat(inputRows.map(r => ({...r})));
-inputRows = [];
-renderInputTable();
-renderRekap();
-renderRekapAkhir();
-showToast('💾 Data berhasil disimpan ke rekapitulasi!');
+  if (!inputRows.length) { showToast('⚠ Tidak ada data untuk disimpan!'); return; }
+  rekapData = rekapData.concat(inputRows.map(r => ({...r})));
+  saveToStorage();
+  inputRows = [];
+  renderInputTable();
+  renderRekap();
+  renderRekapAkhir();
+  showToast('💾 Data berhasil disimpan ke rekapitulasi!');
 }
 
 // ════════════════════════════════════════
-// HELPER: Get grouped data with combined scores
+//   HELPER: Get grouped data with combined scores
 // ════════════════════════════════════════
 function getCombinedData(filterCabang, filterGolongan) {
-let data = [...rekapData];
-if (filterCabang) data = data.filter(r => r.cabang === filterCabang);
-if (filterGolongan) data = data.filter(r => r.golongan === filterGolongan);
+  let data = [...rekapData];
+  if (filterCabang) data = data.filter(r => r.cabang === filterCabang);
+  if (filterGolongan) data = data.filter(r => r.golongan === filterGolongan);
 
-const combined = {};
+  const combined = {};
 
-data.forEach(r => {
-const key = `${r.noPeserta}||${r.cabang}||${r.golongan}||${r.bidang}`;
-if (!combined[key]) {
-combined[key] = {
-noPeserta: r.noPeserta,
-cabang: r.cabang,
-golongan: r.golongan,
-bidang: r.bidang,
-nilaiList: [],
-hakimList: []
-};
-}
-combined[key].nilaiList.push(r.nilai);
-combined[key].hakimList.push(r.hakim);
-});
+  data.forEach(r => {
+    const key = `${r.noPeserta}||${r.cabang}||${r.golongan}||${r.bidang}`;
+    if (!combined[key]) {
+      combined[key] = {
+        noPeserta: r.noPeserta,
+        cabang: r.cabang,
+        golongan: r.golongan,
+        bidang: r.bidang,
+        nilaiList: [],
+        hakimList: []
+      };
+    }
+    combined[key].nilaiList.push(r.nilai);
+    combined[key].hakimList.push(r.hakim);
+  });
 
-const result = [];
-Object.values(combined).forEach(item => {
-const gabungan = item.nilaiList.reduce((a, b) => a + b, 0) / item.nilaiList.length;
-result.push({
-...item,
-nilaiGabungan: Math.round(gabungan * 100) / 100,
-jumlahHakim: item.nilaiList.length,
-hakimDisplay: item.hakimList.join(', ')
-});
-});
+  const result = [];
+  Object.values(combined).forEach(item => {
+    const gabungan = item.nilaiList.reduce((a, b) => a + b, 0) / item.nilaiList.length;
+    result.push({
+      ...item,
+      nilaiGabungan: Math.round(gabungan * 100) / 100,
+      jumlahHakim: item.nilaiList.length,
+      hakimDisplay: item.hakimList.join(', ')
+    });
+  });
 
-return result;
+  return result;
 }
 
 // ════════════════════════════════════════
-// REKAP RENDER (with Combined Score)
+//   REKAP RENDER (with Combined Score)
 // ════════════════════════════════════════
 function getFilteredRekap() {
-const fc = document.getElementById('filterCabang').value;
-const fg = document.getElementById('filterGolongan').value;
-return getCombinedData(fc, fg);
+  const fc = document.getElementById('filterCabang').value;
+  const fg = document.getElementById('filterGolongan').value;
+  return getCombinedData(fc, fg);
 }
 
 function renderRekap() {
-const container = document.getElementById('rekap-container');
-const data = getFilteredRekap();
+  const container = document.getElementById('rekap-container');
+  const data = getFilteredRekap();
 
-if (!data.length) {
-container.innerHTML = `<div class="empty-rekap">Belum ada data rekapitulasi atau tidak ada yang cocok dengan filter.</div>`;
-return;
-}
+  if (!data.length) {
+    container.innerHTML = `<div class="empty-rekap">Belum ada data rekapitulasi atau tidak ada yang cocok dengan filter.</div>`;
+    return;
+  }
 
-const groups = {};
-data.forEach(r => {
-const key = `${r.cabang}||${r.golongan}||${r.bidang}`;
-if (!groups[key]) groups[key] = { cabang: r.cabang, golongan: r.golongan, bidang: r.bidang, rows: [] };
-groups[key].rows.push(r);
-});
+  const groups = {};
+  data.forEach(r => {
+    const key = `${r.cabang}||${r.golongan}||${r.bidang}`;
+    if (!groups[key]) groups[key] = { cabang: r.cabang, golongan: r.golongan, bidang: r.bidang, rows: [] };
+    groups[key].rows.push(r);
+  });
 
-Object.values(groups).forEach(g => {
-g.rows.sort((a, b) => b.nilaiGabungan - a.nilaiGabungan);
-});
+  Object.values(groups).forEach(g => {
+    g.rows.sort((a, b) => b.nilaiGabungan - a.nilaiGabungan);
+  });
 
-let html = `
-<table id="rekap-table">
-<thead>
-<tr>
-<th rowspan="2">Urut</th>
-<th rowspan="2">No. Peserta</th>
-<th rowspan="2">Cabang</th>
-<th rowspan="2">Golongan</th>
-<th rowspan="2">Bidang Penilaian</th>
-<th rowspan="2">Jumlah Hakim</th>
-<th colspan="2">Nilai</th>
-<th rowspan="2">Keterangan</th>
-</tr>
-<tr>
-<th>Individu</th>
-<th>Gabungan (/100)</th>
-</tr>
-</thead>
-<tbody>`;
+  let html = `
+  <table id="rekap-table">
+    <thead>
+      <tr>
+        <th rowspan="2">Urut</th>
+        <th rowspan="2">No. Peserta</th>
+        <th rowspan="2">Cabang</th>
+        <th rowspan="2">Golongan</th>
+        <th rowspan="2">Bidang Penilaian</th>
+        <th rowspan="2">Jumlah Hakim</th>
+        <th colspan="2">Nilai</th>
+        <th rowspan="2">Keterangan</th>
+      </tr>
+      <tr>
+        <th>Individu</th>
+        <th>Gabungan (/100)</th>
+      </tr>
+    </thead>
+    <tbody>`;
 
-let globalNo = 0;
-Object.values(groups).forEach(g => {
-g.rows.forEach((r, idx) => {
-globalNo++;
-const rank = idx + 1;
-let rankBadge = `<span class="rank-badge rank-other">${rank}</span>`;
-if (rank === 1) rankBadge = `<span class="rank-badge rank-1">1</span>`;
-else if (rank === 2) rankBadge = `<span class="rank-badge rank-2">2</span>`;
-else if (rank === 3) rankBadge = `<span class="rank-badge rank-3">3</span>`;
+  let globalNo = 0;
+  Object.values(groups).forEach(g => {
+    g.rows.forEach((r, idx) => {
+      globalNo++;
+      const rank = idx + 1;
+      let rankBadge = `<span class="rank-badge rank-other">${rank}</span>`;
+      if (rank === 1) rankBadge = `<span class="rank-badge rank-1">1</span>`;
+      else if (rank === 2) rankBadge = `<span class="rank-badge rank-2">2</span>`;
+      else if (rank === 3) rankBadge = `<span class="rank-badge rank-3">3</span>`;
 
-const nilaiIndividu = r.nilaiList.map((n, i) => `${r.hakimList[i]}: ${n}`).join('<br>');
+      const nilaiIndividu = r.nilaiList.map((n, i) => `${r.hakimList[i]}: ${n}`).join('<br>');
 
-html += `
-<tr>
-<td>${globalNo}</td>
-<td><strong>${r.noPeserta}</strong></td>
-<td>${r.cabang}</td>
-<td>${r.golongan}</td>
-<td class="bidang-name">${r.bidang}</td>
-<td>${r.jumlahHakim} hakim</td>
-<td style="font-size:0.75rem;text-align:left;">${nilaiIndividu}</td>
-<td class="gabungan-cell">${r.nilaiGabungan}</td>
-<td>${rankBadge}</td>
-</tr>`;
-});
-});
+      html += `
+        <tr>
+          <td>${globalNo}</td>
+          <td><strong>${r.noPeserta}</strong></td>
+          <td>${r.cabang}</td>
+          <td>${r.golongan}</td>
+          <td class="bidang-name">${r.bidang}</td>
+          <td>${r.jumlahHakim} hakim</td>
+          <td style="font-size:0.75rem;text-align:left;">${nilaiIndividu}</td>
+          <td class="gabungan-cell">${r.nilaiGabungan}</td>
+          <td>${rankBadge}</td>
+        </tr>`;
+    });
+  });
 
-html += `</tbody></table>`;
-container.innerHTML = html;
+  html += `</tbody></table>`;
+  container.innerHTML = html;
 }
 
 // ════════════════════════════════════════
-// REKAP AKHIR RENDER
+//   REKAP AKHIR RENDER - PER CABANG & GOLONGAN
 // ════════════════════════════════════════
 function getRekapAkhirData(filterCabang, filterGolongan) {
-const combinedData = getCombinedData(filterCabang, filterGolongan);
+  const combinedData = getCombinedData(filterCabang, filterGolongan);
 
-const pesertaMap = {};
+  // Group by: cabang + golongan + noPeserta
+  const pesertaMap = {};
 
-combinedData.forEach(r => {
-const key = `${r.noPeserta}||${r.cabang}||${r.golongan}`;
-if (!pesertaMap[key]) {
-pesertaMap[key] = {
-noPeserta: r.noPeserta,
-cabang: r.cabang,
-golongan: r.golongan,
-bidangScores: {},
-totalNilai: 0,
-jumlahBidang: 0
-};
-}
-pesertaMap[key].bidangScores[r.bidang] = r.nilaiGabungan;
-pesertaMap[key].totalNilai += r.nilaiGabungan;
-pesertaMap[key].jumlahBidang++;
-});
+  combinedData.forEach(r => {
+    const key = `${r.cabang}||${r.golongan}||${r.noPeserta}`;
+    if (!pesertaMap[key]) {
+      pesertaMap[key] = {
+        noPeserta: r.noPeserta,
+        cabang: r.cabang,
+        golongan: r.golongan,
+        bidangScores: {},
+        totalNilai: 0,
+        jumlahBidang: 0
+      };
+    }
+    pesertaMap[key].bidangScores[r.bidang] = r.nilaiGabungan;
+    pesertaMap[key].totalNilai += r.nilaiGabungan;
+    pesertaMap[key].jumlahBidang++;
+  });
 
-const result = Object.values(pesertaMap).map(p => ({
-...p,
-rataRata: Math.round((p.totalNilai / p.jumlahBidang) * 100) / 100
-}));
+  // Group by cabang+golongan for ranking per group
+  const groupMap = {};
+  Object.values(pesertaMap).forEach(p => {
+    const groupKey = `${p.cabang}||${p.golongan}`;
+    if (!groupMap[groupKey]) {
+      groupMap[groupKey] = {
+        cabang: p.cabang,
+        golongan: p.golongan,
+        peserta: []
+      };
+    }
+    groupMap[groupKey].peserta.push({
+      ...p,
+      rataRata: Math.round((p.totalNilai / p.jumlahBidang) * 100) / 100
+    });
+  });
 
-result.sort((a, b) => b.totalNilai - a.totalNilai);
+  // Sort each group by totalNilai DESC and assign rank
+  Object.values(groupMap).forEach(g => {
+    g.peserta.sort((a, b) => b.totalNilai - a.totalNilai);
+    g.peserta.forEach((p, idx) => {
+      p.rank = idx + 1;
+    });
+  });
 
-return result;
+  // Flatten back to array
+  let result = [];
+  Object.values(groupMap).forEach(g => {
+    result = result.concat(g.peserta);
+  });
+
+  // Sort by cabang, golongan, then rank
+  result.sort((a, b) => {
+    if (a.cabang !== b.cabang) return a.cabang.localeCompare(b.cabang);
+    if (a.golongan !== b.golongan) return a.golongan.localeCompare(b.golongan);
+    return a.rank - b.rank;
+  });
+
+  return result;
 }
 
 function renderRekapAkhir() {
-const container = document.getElementById('rekap-akhir-container');
-const fc = document.getElementById('filterCabangAkhir').value;
-const fg = document.getElementById('filterGolonganAkhir').value;
-const data = getRekapAkhirData(fc, fg);
+  const container = document.getElementById('rekap-akhir-container');
+  const fc = document.getElementById('filterCabangAkhir').value;
+  const fg = document.getElementById('filterGolonganAkhir').value;
+  const data = getRekapAkhirData(fc, fg);
 
-if (!data.length) {
-container.innerHTML = `<div class="empty-rekap">Belum ada data rekapitulasi atau tidak ada yang cocok dengan filter.</div>`;
-return;
-}
+  if (!data.length) {
+    container.innerHTML = `<div class="empty-rekap">Belum ada data rekapitulasi atau tidak ada yang cocok dengan filter.</div>`;
+    return;
+  }
 
-const allBidangs = new Set();
-data.forEach(p => {
-Object.keys(p.bidangScores).forEach(b => allBidangs.add(b));
-});
-const bidangList = Array.from(allBidangs);
+  const allBidangs = new Set();
+  data.forEach(p => {
+    Object.keys(p.bidangScores).forEach(b => allBidangs.add(b));
+  });
+  const bidangList = Array.from(allBidangs);
 
-let html = `
-<table id="rekap-akhir-table">
-<thead>
-<tr>
-<th rowspan="2">Peringkat</th>
-<th rowspan="2">No. Peserta</th>
-<th rowspan="2">Cabang</th>
-<th rowspan="2">Golongan</th>
-<th colspan="${bidangList.length}">Nilai Gabungan per Bidang</th>
-<th rowspan="2">Total Nilai</th>
-<th rowspan="2">Rata-rata</th>
-<th rowspan="2">Keterangan</th>
-</tr>
-<tr>`;
+  let html = `
+  <table id="rekap-akhir-table">
+    <thead>
+      <tr>
+        <th rowspan="2">Peringkat</th>
+        <th rowspan="2">No. Peserta</th>
+        <th rowspan="2">Cabang</th>
+        <th rowspan="2">Golongan</th>
+        <th colspan="${bidangList.length}">Nilai Gabungan per Bidang</th>
+        <th rowspan="2">Total Nilai</th>
+        <th rowspan="2">Rata-rata</th>
+        <th rowspan="2">Keterangan</th>
+      </tr>
+      <tr>`;
 
-bidangList.forEach(b => {
-html += `<th>${b}</th>`;
-});
+  bidangList.forEach(b => {
+    html += `<th>${b}</th>`;
+  });
 
-html += `</tr></thead><tbody>`;
+  html += `</tr></thead><tbody>`;
 
-data.forEach((p, idx) => {
-const rank = idx + 1;
-let rankBadge = `<span class="rank-badge rank-other">${rank}</span>`;
-if (rank === 1) rankBadge = `<span class="rank-badge rank-1">1</span>`;
-else if (rank === 2) rankBadge = `<span class="rank-badge rank-2">2</span>`;
-else if (rank === 3) rankBadge = `<span class="rank-badge rank-3">3</span>`;
+  let currentGroup = '';
+  data.forEach((p) => {
+    const groupKey = `${p.cabang}-${p.golongan}`;
+    const isNewGroup = groupKey !== currentGroup;
+    if (isNewGroup) currentGroup = groupKey;
 
-html += `
-<tr>
-<td>${rankBadge}</td>
-<td><strong>${p.noPeserta}</strong></td>
-<td>${p.cabang}</td>
-<td>${p.golongan}</td>`;
+    const rank = p.rank;
+    let rankBadge = `<span class="rank-badge rank-other">${rank}</span>`;
+    if (rank === 1) rankBadge = `<span class="rank-badge rank-1">1</span>`;
+    else if (rank === 2) rankBadge = `<span class="rank-badge rank-2">2</span>`;
+    else if (rank === 3) rankBadge = `<span class="rank-badge rank-3">3</span>`;
 
-bidangList.forEach(b => {
-const score = p.bidangScores[b] || '-';
-html += `<td class="total-cell">${score}</td>`;
-});
+    html += `
+      <tr>
+        <td>${rankBadge}</td>
+        <td><strong>${p.noPeserta}</strong></td>
+        <td>${p.cabang}</td>
+        <td>${p.golongan}</td>`;
 
-html += `
-<td class="gabungan-cell">${Math.round(p.totalNilai * 100) / 100}</td>
-<td class="total-cell">${p.rataRata}</td>
-<td><strong style="color:var(--orange-deep)">Juara ${rank}</strong></td>
-</tr>`;
-});
+    bidangList.forEach(b => {
+      const score = p.bidangScores[b] || '-';
+      html += `<td class="total-cell">${score}</td>`;
+    });
 
-html += `</tbody></table>`;
-container.innerHTML = html;
+    html += `
+        <td class="gabungan-cell">${Math.round(p.totalNilai * 100) / 100}</td>
+        <td class="total-cell">${p.rataRata}</td>
+        <td><strong style="color:var(--orange-deep)">Juara ${rank}</strong></td>
+      </tr>`;
+  });
+
+  html += `</tbody></table>`;
+  container.innerHTML = html;
 }
 
 // ════════════════════════════════════════
-// EXPORT EXCEL - REKAP
+//   EXPORT EXCEL - REKAP
 // ════════════════════════════════════════
 function exportExcelRekap() {
-const data = getFilteredRekap();
-if (!data.length) { showToast('⚠ Tidak ada data untuk diekspor!'); return; }
+  const data = getFilteredRekap();
+  if (!data.length) { showToast('⚠ Tidak ada data untuk diekspor!'); return; }
 
-const groups = {};
-data.forEach(r => {
-const key = `${r.cabang}||${r.golongan}||${r.bidang}`;
-if (!groups[key]) groups[key] = { cabang: r.cabang, golongan: r.golongan, bidang: r.bidang, rows: [] };
-groups[key].rows.push(r);
-});
-Object.values(groups).forEach(g => g.rows.sort((a, b) => b.nilaiGabungan - a.nilaiGabungan));
+  const groups = {};
+  data.forEach(r => {
+    const key = `${r.cabang}||${r.golongan}||${r.bidang}`;
+    if (!groups[key]) groups[key] = { cabang: r.cabang, golongan: r.golongan, bidang: r.bidang, rows: [] };
+    groups[key].rows.push(r);
+  });
+  Object.values(groups).forEach(g => g.rows.sort((a, b) => b.nilaiGabungan - a.nilaiGabungan));
 
-const wsData = [
-['REKAPITULASI NILAI GABUNGAN MUSABAQOH TILAWATIL QUR\'AN XII TAHUN 2026'],
-['TINGKAT KABUPATEN SERAM BAGIAN TIMUR'],
-['Lembaga Pengembangan Tilawatil Qur\'an (LPTQ)'],
-[],
-['No. Urut', 'No. Peserta', 'Cabang', 'Golongan', 'Bidang Penilaian', 'Jumlah Hakim', 'Nilai Individu', 'Nilai Gabungan (/100)', 'Peringkat']
-];
+  const wsData = [
+    ['REKAPITULASI NILAI GABUNGAN MUSABAQOH TILAWATIL QUR\'AN XII TAHUN 2026'],
+    ['TINGKAT KABUPATEN SERAM BAGIAN TIMUR'],
+    ['Lembaga Pengembangan Tilawatil Qur\'an (LPTQ)'],
+    [],
+    ['No. Urut', 'No. Peserta', 'Cabang', 'Golongan', 'Bidang Penilaian', 'Jumlah Hakim', 'Nilai Individu', 'Nilai Gabungan (/100)', 'Peringkat']
+  ];
 
-let no = 0;
-Object.values(groups).forEach(g => {
-g.rows.forEach((r, idx) => {
-no++;
-const nilaiIndividu = r.nilaiList.map((n, i) => `${r.hakimList[i]}: ${n}`).join('; ');
-wsData.push([no, r.noPeserta, r.cabang, r.golongan, r.bidang, r.jumlahHakim, nilaiIndividu, r.nilaiGabungan, idx + 1]);
-});
-});
+  let no = 0;
+  Object.values(groups).forEach(g => {
+    g.rows.forEach((r, idx) => {
+      no++;
+      const nilaiIndividu = r.nilaiList.map((n, i) => `${r.hakimList[i]}: ${n}`).join('; ');
+      wsData.push([no, r.noPeserta, r.cabang, r.golongan, r.bidang, r.jumlahHakim, nilaiIndividu, r.nilaiGabungan, idx + 1]);
+    });
+  });
 
-const wb = XLSX.utils.book_new();
-const ws = XLSX.utils.aoa_to_sheet(wsData);
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet(wsData);
 
-ws['!cols'] = [
-{wch: 8}, {wch: 14}, {wch: 12}, {wch: 14}, {wch: 22}, {wch: 14}, {wch: 30}, {wch: 18}, {wch: 10}
-];
+  ws['!cols'] = [
+    {wch: 8}, {wch: 14}, {wch: 12}, {wch: 14}, {wch: 22}, {wch: 14}, {wch: 30}, {wch: 18}, {wch: 10}
+  ];
 
-ws['!merges'] = [
-{s:{r:0,c:0}, e:{r:0,c:8}},
-{s:{r:1,c:0}, e:{r:1,c:8}},
-{s:{r:2,c:0}, e:{r:2,c:8}},
-];
+  ws['!merges'] = [
+    {s:{r:0,c:0}, e:{r:0,c:8}},
+    {s:{r:1,c:0}, e:{r:1,c:8}},
+    {s:{r:2,c:0}, e:{r:2,c:8}},
+  ];
 
-XLSX.utils.book_append_sheet(wb, ws, 'Rekap Gabungan MTQ XII');
-XLSX.writeFile(wb, 'Rekapitulasi_Gabungan_MTQ_XII_2026_SBT.xlsx');
-showToast('📥 File Excel berhasil diunduh!');
+  XLSX.utils.book_append_sheet(wb, ws, 'Rekap Gabungan MTQ XII');
+  XLSX.writeFile(wb, 'Rekapitulasi_Gabungan_MTQ_XII_2026_SBT.xlsx');
+  showToast('📥 File Excel berhasil diunduh!');
 }
 
 // ════════════════════════════════════════
-// EXPORT EXCEL - REKAP AKHIR
+//   EXPORT EXCEL - REKAP AKHIR
 // ════════════════════════════════════════
 function exportExcelAkhir() {
-const fc = document.getElementById('filterCabangAkhir').value;
-const fg = document.getElementById('filterGolonganAkhir').value;
-const data = getRekapAkhirData(fc, fg);
+  const fc = document.getElementById('filterCabangAkhir').value;
+  const fg = document.getElementById('filterGolonganAkhir').value;
+  const data = getRekapAkhirData(fc, fg);
 
-if (!data.length) { showToast('⚠ Tidak ada data untuk diekspor!'); return; }
+  if (!data.length) { showToast('⚠ Tidak ada data untuk diekspor!'); return; }
 
-const allBidangs = new Set();
-data.forEach(p => {
-Object.keys(p.bidangScores).forEach(b => allBidangs.add(b));
-});
-const bidangList = Array.from(allBidangs);
+  const allBidangs = new Set();
+  data.forEach(p => {
+    Object.keys(p.bidangScores).forEach(b => allBidangs.add(b));
+  });
+  const bidangList = Array.from(allBidangs);
 
-const wsData = [
-['REKAP AKHIR MUSABAQOH TILAWATIL QUR\'AN XII TAHUN 2026'],
-['TINGKAT KABUPATEN SERAM BAGIAN TIMUR'],
-['Lembaga Pengembangan Tilawatil Qur\'an (LPTQ)'],
-[],
-['Peringkat', 'No. Peserta', 'Cabang', 'Golongan', ...bidangList, 'Total Nilai', 'Rata-rata', 'Keterangan']
-];
+  const wsData = [
+    ['REKAP AKHIR MUSABAQOH TILAWATIL QUR\'AN XII TAHUN 2026'],
+    ['TINGKAT KABUPATEN SERAM BAGIAN TIMUR'],
+    ['Lembaga Pengembangan Tilawatil Qur\'an (LPTQ)'],
+    [],
+    ['Peringkat', 'No. Peserta', 'Cabang', 'Golongan', ...bidangList, 'Total Nilai', 'Rata-rata', 'Keterangan']
+  ];
 
-data.forEach((p, idx) => {
-const row = [idx + 1, p.noPeserta, p.cabang, p.golongan];
-bidangList.forEach(b => row.push(p.bidangScores[b] || '-'));
-row.push(Math.round(p.totalNilai * 100) / 100, p.rataRata, `Juara ${idx + 1}`);
-wsData.push(row);
-});
+  data.forEach((p) => {
+    const row = [p.rank, p.noPeserta, p.cabang, p.golongan];
+    bidangList.forEach(b => row.push(p.bidangScores[b] || '-'));
+    row.push(Math.round(p.totalNilai * 100) / 100, p.rataRata, `Juara ${p.rank}`);
+    wsData.push(row);
+  });
 
-const wb = XLSX.utils.book_new();
-const ws = XLSX.utils.aoa_to_sheet(wsData);
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet(wsData);
 
-const colWidths = [{wch: 10}, {wch: 14}, {wch: 12}, {wch: 14}];
-bidangList.forEach(() => colWidths.push({wch: 16}));
-colWidths.push({wch: 14}, {wch: 12}, {wch: 14});
-ws['!cols'] = colWidths;
+  const colWidths = [{wch: 10}, {wch: 14}, {wch: 12}, {wch: 14}];
+  bidangList.forEach(() => colWidths.push({wch: 16}));
+  colWidths.push({wch: 14}, {wch: 12}, {wch: 14});
+  ws['!cols'] = colWidths;
 
-const lastCol = 3 + bidangList.length + 2;
-ws['!merges'] = [
-{s:{r:0,c:0}, e:{r:0,c:lastCol}},
-{s:{r:1,c:0}, e:{r:1,c:lastCol}},
-{s:{r:2,c:0}, e:{r:2,c:lastCol}},
-];
+  const lastCol = 3 + bidangList.length + 2;
+  ws['!merges'] = [
+    {s:{r:0,c:0}, e:{r:0,c:lastCol}},
+    {s:{r:1,c:0}, e:{r:1,c:lastCol}},
+    {s:{r:2,c:0}, e:{r:2,c:lastCol}},
+  ];
 
-XLSX.utils.book_append_sheet(wb, ws, 'Rekap Akhir MTQ XII');
-XLSX.writeFile(wb, 'Rekap_Akhir_MTQ_XII_2026_SBT.xlsx');
-showToast('📥 File Excel berhasil diunduh!');
+  XLSX.utils.book_append_sheet(wb, ws, 'Rekap Akhir MTQ XII');
+  XLSX.writeFile(wb, 'Rekap_Akhir_MTQ_XII_2026_SBT.xlsx');
+  showToast('📥 File Excel berhasil diunduh!');
 }
 
 // ════════════════════════════════════════
-// TABS
+//   TABS
 // ════════════════════════════════════════
 function switchTab(tab, btn) {
-document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-document.getElementById(`tab-${tab}`).classList.add('active');
-if (btn) btn.classList.add('active');
-if (tab === 'rekap') renderRekap();
-if (tab === 'rekap-akhir') renderRekapAkhir();
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(`tab-${tab}`).classList.add('active');
+  if (btn) btn.classList.add('active');
+  if (tab === 'rekap') renderRekap();
+  if (tab === 'rekap-akhir') renderRekapAkhir();
 }
 
 // ════════════════════════════════════════
-// TOAST
+//   TOAST
 // ════════════════════════════════════════
 function showToast(msg) {
-const t = document.getElementById('toast');
-t.textContent = msg;
-t.classList.add('show');
-setTimeout(() => t.classList.remove('show'), 2800);
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-// Initialize on page load
+// ════════════════════════════════════════
+//   INITIALIZE
+// ════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', function() {
-console.log('Page loaded, initializing...');
+  console.log('Page loaded, initializing...');
+
+  // Load data from localStorage if exists
+  if (loadFromStorage()) {
+    renderRekap();
+    renderRekapAkhir();
+    showToast('📂 Data tersimpan dimuat otomatis!');
+  }
 });
 </script>
 </body>
 </html>
-
