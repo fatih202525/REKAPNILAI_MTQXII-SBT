@@ -4,9 +4,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rekapitulasi Nilai MTQ XII 2026 - Kab. Seram Bagian Timur</title>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Serif:wght@400;600;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<title>Rekapitulasi Nilai MTQ XII 2026 - Kab. Seram Bagian Timur [OFFLINE]</title>
+<style>
+  /* ═══ OFFLINE — System fonts, no CDN dependencies ═══ */
+  @font-face {
+    font-family: 'Cairo';
+    src: local('Segoe UI'), local('Arial'), local('Helvetica Neue'), local('sans-serif');
+  }
+  @font-face {
+    font-family: 'Noto Serif';
+    src: local('Georgia'), local('Times New Roman'), local('serif');
+  }
+  @font-face {
+    font-family: 'Amiri';
+    src: local('Arial Unicode MS'), local('Traditional Arabic'), local('serif');
+  }
+</style>
 <style>
   :root {
     --orange-deep: #C45C0A;
@@ -528,20 +541,214 @@
     .tabs { flex-direction: column; }
     .form-grid { grid-template-columns: 1fr; }
   }
+
+  /* ── Logo Box (uploadable) ── */
+  .logo-box {
+    width: 100px; height: 100px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.4);
+    backdrop-filter: blur(4px);
+    overflow: visible;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+    position: relative;
+    cursor: pointer;
+  }
+  .logo-box > div:first-child {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-box img {
+    width: 86px; height: 86px;
+    object-fit: contain;
+    border-radius: 50%;
+    transition: transform 0.25s;
+  }
+  .logo-hover-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(0,0,0,0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    gap: 2px;
+    pointer-events: none;
+  }
+  .logo-box:hover .logo-hover-overlay { background: rgba(0,0,0,0.52); }
+  .logo-icon {
+    font-size: 1.4rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+    line-height: 1;
+  }
+  .logo-label {
+    color: white;
+    font-size: 0.62rem;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: 700;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    line-height: 1.3;
+  }
+  .logo-box:hover .logo-icon,
+  .logo-box:hover .logo-label { opacity: 1; }
+  .logo-remove-btn {
+    position: absolute;
+    top: -4px; right: -4px;
+    width: 22px; height: 22px;
+    background: #b71c1c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    z-index: 10;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+    line-height: 1;
+  }
+  .logo-box.has-logo .logo-remove-btn { display: flex; opacity: 0; transition: opacity 0.2s; }
+  .logo-box.has-logo:hover .logo-remove-btn { opacity: 1; }
+
+  /* ── Ornament bar ── */
+  .ornament-bar {
+    text-align: center;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+    color: var(--dark-brown);
+    font-size: 1.1rem;
+    letter-spacing: 0.5em;
+    padding: 4px 0;
+  }
+
+  /* ── Offline badge ── */
+  .offline-badge {
+    position: absolute;
+    top: 8px; right: 12px;
+    background: #2e7d32;
+    color: white;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 12px;
+    letter-spacing: 0.05em;
+    opacity: 0.9;
+    z-index: 5;
+  }
+
+  /* ── Edit mode banner ── */
+  #edit-mode-banner {
+    display: none;
+    background: linear-gradient(135deg, #1565C0, #1976D2);
+    color: white;
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin-bottom: 20px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 3px 14px rgba(21,101,192,0.35);
+  }
+  #edit-mode-banner.active { display: flex; }
+  #edit-mode-banner .banner-info { flex: 1; line-height: 1.5; }
+  #edit-mode-banner .banner-info span {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 400;
+    opacity: 0.85;
+    margin-top: 2px;
+  }
+  #edit-mode-banner .btn-cancel-edit {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    border-radius: 8px;
+    padding: 7px 16px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  #edit-mode-banner .btn-cancel-edit:hover { background: rgba(255,255,255,0.35); }
+
+  /* ── Rekap table action buttons ── */
+  .rekap-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .rekap-action-btn.edit-btn {
+    background: linear-gradient(135deg, #1565C0, #1976D2);
+    color: white;
+    box-shadow: 0 2px 6px rgba(21,101,192,0.3);
+  }
+  .rekap-action-btn.edit-btn:hover { transform: translateY(-1px); box-shadow: 0 3px 10px rgba(21,101,192,0.4); }
+  .rekap-action-btn.hapus-btn {
+    background: linear-gradient(135deg, #b71c1c, #e53935);
+    color: white;
+    box-shadow: 0 2px 6px rgba(183,28,28,0.25);
+  }
+  .rekap-action-btn.hapus-btn:hover { transform: translateY(-1px); }
+  .rekap-action-cell { display: flex; gap: 5px; justify-content: center; flex-wrap: wrap; }
+
+  /* ── Input card edit highlight ── */
+  .card.edit-mode-active {
+    border-color: #1565C0 !important;
+    box-shadow: 0 0 0 3px rgba(21,101,192,0.18), 0 4px 20px var(--shadow) !important;
+  }
+  .card.edit-mode-active::before {
+    background: linear-gradient(90deg, #1565C0, #42A5F5, #1565C0) !important;
+  }
 </style>
+<base target="_blank">
 </head>
 <body>
 
 <!-- ══ HEADER ══ -->
 <header>
+<div class="offline-badge">✓ OFFLINE</div>
 <div class="header-inner">
-<!-- Logo Kabupaten Seram Bagian Timur (Kanan) -->
-    <img src="https://kimi-web-img.moonshot.cn/img/upload.wikimedia.org/651ac4d806fab6152b4b5713f4fb3d1377dcf90b.png" 
-         alt="Logo Kabupaten Seram Bagian Timur" 
-         style="width: 85px; height: 85px; object-fit: contain; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4)); transition: transform 0.3s ease;"
-         onmouseover="this.style.transform='scale(1.1)'" 
-         onmouseout="this.style.transform='scale(1)'">
 
+<!-- Logo Kiri (uploadable) -->
+<div class="logo-box" id="logoBox1" onclick="triggerLogoUpload(1)" title="Klik untuk pasang logo">
+  <div id="logoContent1">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:76px;height:76px">
+      <circle cx="50" cy="50" r="46" fill="#fff4e0" stroke="#D4A017" stroke-width="3"/>
+      <polygon points="50,10 58,36 86,36 63,53 71,79 50,63 29,79 37,53 14,36 42,36" fill="#E07820" opacity="0.85"/>
+      <circle cx="50" cy="50" r="18" fill="none" stroke="#D4A017" stroke-width="2.5"/>
+      <text x="50" y="54" text-anchor="middle" font-size="9" font-family="Arial" fill="#1A0E00" font-weight="bold">LPTQ</text>
+      <text x="50" y="88" text-anchor="middle" font-size="7" font-family="Arial" fill="#C45C0A">MTQ XII 2026</text>
+    </svg>
+  </div>
+  <div class="logo-hover-overlay">
+    <span class="logo-icon">📷</span>
+    <span class="logo-label">Ganti<br>Logo</span>
+  </div>
+  <button class="logo-remove-btn" id="logoRemove1" onclick="removeLogo(event,1)" title="Hapus logo">✕</button>
+</div>
 
 <!-- Teks tengah -->
 <div class="header-text">
@@ -552,12 +759,28 @@
 <div class="subtitle">Created By MOH MUNIRUL MUKMIN</div>
 </div>
 
-<!-- Logo LPTQ (Kiri) -->
-    <img src="https://kimi-web-img.moonshot.cn/img/imgv2-2-f.scribdassets.com/2a8ec1d0b1c7f008a1e5bae4518ba3c0c4cfd4c7" 
-         alt="Logo LPTQ" 
-         style="width: 85px; height: 85px; object-fit: contain; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4)); transition: transform 0.3s ease;"
-         onmouseover="this.style.transform='scale(1.1)'" 
-         onmouseout="this.style.transform='scale(1)'">
+<!-- Logo Kanan (uploadable) -->
+<div class="logo-box" id="logoBox2" onclick="triggerLogoUpload(2)" title="Klik untuk pasang logo">
+  <div id="logoContent2">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:76px;height:76px">
+      <circle cx="50" cy="50" r="46" fill="#fff4e0" stroke="#C45C0A" stroke-width="3"/>
+      <path d="M50 14 L72 24 L72 56 Q72 74 50 84 Q28 74 28 56 L28 24 Z" fill="#E07820" stroke="#D4A017" stroke-width="1.5"/>
+      <path d="M50 20 L66 28 L66 54 Q66 68 50 78 Q34 68 34 54 L34 28 Z" fill="#FDE8C8"/>
+      <path d="M34 55 Q42 50 50 55 Q58 60 66 55" stroke="#1565C0" stroke-width="2.5" fill="none"/>
+      <path d="M34 62 Q42 57 50 62 Q58 67 66 62" stroke="#1565C0" stroke-width="2" fill="none"/>
+      <polygon points="50,25 52,32 59,32 53,37 56,44 50,40 44,44 47,37 41,32 48,32" fill="#D4A017"/>
+      <text x="50" y="90" text-anchor="middle" font-size="6" font-family="Arial" fill="#C45C0A" font-weight="bold">KAB. SBT</text>
+    </svg>
+  </div>
+  <div class="logo-hover-overlay">
+    <span class="logo-icon">📷</span>
+    <span class="logo-label">Ganti<br>Logo</span>
+  </div>
+  <button class="logo-remove-btn" id="logoRemove2" onclick="removeLogo(event,2)" title="Hapus logo">✕</button>
+</div>
+
+</div><!-- /.header-inner -->
+<div class="ornament-bar">❖ &nbsp; ✦ &nbsp; ❖ &nbsp; ✦ &nbsp; ❖ &nbsp; ✦ &nbsp; ❖ &nbsp; ✦ &nbsp; ❖</div>
 </header>
 
 <div class="container">
@@ -570,7 +793,18 @@
 
   <!-- TAB INPUT -->
   <div id="tab-input" class="tab-panel active">
-    <div class="card">
+
+    <!-- Banner mode edit -->
+    <div id="edit-mode-banner">
+      <div style="font-size:1.4rem">✏️</div>
+      <div class="banner-info">
+        <span id="edit-banner-title">Mode Edit Aktif</span>
+        <span id="edit-banner-desc">Ubah data di bawah, lalu klik "Simpan Perubahan".</span>
+      </div>
+      <button class="btn-cancel-edit" onclick="batalEdit()">✕ Batal Edit</button>
+    </div>
+
+    <div class="card" id="input-form-card">
       <div class="card-title">Form Input Nilai Dewan Hakim</div>
 
       <div class="form-grid">
@@ -595,8 +829,12 @@
           </select>
         </div>
         <div class="form-group">
-          <label>Nama Dewan Hakim</label>
-          <input type="text" id="namaHakim" placeholder="Tulis nama hakim...">
+          <label>Dewan Hakim</label>
+          <select id="namaHakim">
+            <option value="">-- Pilih Hakim --</option>
+            <option value="Hakim 1">Hakim 1</option>
+            <option value="Hakim 2">Hakim 2</option>
+          </select>
         </div>
         <div class="form-group">
           <label>Bidang Penilaian</label>
@@ -638,7 +876,7 @@
         </table>
       </div>
       <div class="btn-actions">
-        <button class="btn btn-gold" onclick="simpanKeRekap()">💾 Simpan & Rekap Nilai</button>
+        <button class="btn btn-gold" id="btn-simpan-rekap" onclick="simpanKeRekap()">💾 Simpan &amp; Rekap Nilai</button>
         <button class="btn btn-danger" onclick="konfirmasiHapusSemuaData()">🗑️ Hapus Semua Data Tersimpan</button>
       </div>
     </div>
@@ -661,8 +899,14 @@
         </div>
         <div class="form-group">
           <label>Filter Golongan</label>
-          <select id="filterGolongan" onchange="renderRekap()">
+          <select id="filterGolongan" onchange="updateFilterBidang(); renderRekap();">
             <option value="">Semua Golongan</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Filter Bidang Penilaian</label>
+          <select id="filterBidangRekap" onchange="renderRekap()">
+            <option value="">Semua Bidang</option>
           </select>
         </div>
         <div class="form-group">
@@ -748,6 +992,285 @@
     </div>
   </div>
 </div>
+
+<!-- ═══════════════════════════════════════════════════════
+     XLSX.js — Embedded inline untuk ekspor Excel OFFLINE
+     Implementasi native Uint8Array — tidak pakai string binary
+════════════════════════════════════════════════════════ -->
+<script>
+(function(g){"use strict";
+
+var XLSX = {};
+var _enc = new TextEncoder();
+
+// ── Helpers ──────────────────────────────────────────────
+function strBytes(s){ return _enc.encode(s); }
+
+function escXML(v){
+  return String(v==null?"":v)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;").replace(/'/g,"&apos;");
+}
+
+function encodeCell(c){
+  var s="",col=c.c;
+  do{s=String.fromCharCode(65+(col%26))+s;col=Math.floor(col/26)-1;}while(col>=0);
+  return s+(c.r+1);
+}
+function encodeRange(s,e){ return encodeCell(s)+":"+encodeCell(e); }
+
+function decodeCell(ref){
+  var col=0,i=0;
+  while(i<ref.length&&ref[i]>="A"){col=col*26+(ref.charCodeAt(i)-64);i++;}
+  return{r:parseInt(ref.slice(i),10)-1,c:col-1};
+}
+function decodeRange(ref){
+  var p=ref.split(":");
+  return{s:decodeCell(p[0]),e:decodeCell(p[p.length-1])};
+}
+
+// ── CRC32 ─────────────────────────────────────────────────
+var CRC_TABLE = (function(){
+  var t=[];
+  for(var n=0;n<256;n++){var c=n;for(var k=0;k<8;k++)c=((c&1)?0xEDB88320^(c>>>1):(c>>>1));t[n]=c;}
+  return t;
+})();
+function crc32(u8){
+  var c=0xFFFFFFFF;
+  for(var i=0;i<u8.length;i++)c=(c>>>8)^CRC_TABLE[(c^u8[i])&0xFF];
+  return(c^0xFFFFFFFF)>>>0;
+}
+
+// ── u16 / u32 as bytes ────────────────────────────────────
+function u16b(v){ return new Uint8Array([v&0xFF,(v>>8)&0xFF]); }
+function u32b(v){ return new Uint8Array([v&0xFF,(v>>8)&0xFF,(v>>16)&0xFF,(v>>24)&0xFF]); }
+
+// ── Concatenate multiple Uint8Arrays ──────────────────────
+function concat(){
+  var args=Array.from(arguments);
+  var total=args.reduce(function(a,b){return a+b.length;},0);
+  var out=new Uint8Array(total),off=0;
+  args.forEach(function(a){out.set(a,off);off+=a.length;});
+  return out;
+}
+
+// ── XLSX API ──────────────────────────────────────────────
+XLSX.utils = {};
+
+XLSX.utils.aoa_to_sheet = function(aoa){
+  var ws={},mR=0,mC=0;
+  for(var R=0;R<aoa.length;R++){
+    for(var C=0;C<aoa[R].length;C++){
+      var v=aoa[R][C]; if(v==null) continue;
+      var cr=encodeCell({r:R,c:C}),cell={v:v};
+      cell.t=(typeof v==="number")?"n":(typeof v==="boolean")?"b":"s";
+      if(cell.t==="s") cell.v=String(v);
+      ws[cr]=cell;
+      if(R>mR)mR=R; if(C>mC)mC=C;
+    }
+  }
+  ws["!ref"]=encodeRange({r:0,c:0},{r:mR,c:mC});
+  return ws;
+};
+
+XLSX.utils.book_new = function(){ return{SheetNames:[],Sheets:{}}; };
+XLSX.utils.book_append_sheet = function(wb,ws,n){ wb.SheetNames.push(n); wb.Sheets[n]=ws; };
+
+XLSX.writeFile = function(wb,filename){
+  var data = buildXLSX(wb);   // returns Uint8Array
+  var blob = new Blob([data],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href=url; a.download=filename;
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); },200);
+};
+
+// ── Build XLSX package (returns Uint8Array) ───────────────
+function buildXLSX(wb){
+  var files = {};   // name -> Uint8Array
+
+  // [Content_Types].xml
+  var ct = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+    +'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+    +'<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
+    +'<Default Extension="xml" ContentType="application/xml"/>'
+    +'<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>';
+  for(var i=0;i<wb.SheetNames.length;i++)
+    ct+='<Override PartName="/xl/worksheets/sheet'+(i+1)+'.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>';
+  ct+='<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'
+    +'<Override PartName="/xl/sharedStrings.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/>'
+    +'</Types>';
+  files["[Content_Types].xml"] = strBytes(ct);
+
+  // _rels/.rels
+  files["_rels/.rels"] = strBytes(
+    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+    +'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+    +'<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>'
+    +'</Relationships>');
+
+  // xl/_rels/workbook.xml.rels
+  var wr='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+    +'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">';
+  for(var j=0;j<wb.SheetNames.length;j++)
+    wr+='<Relationship Id="rId'+(j+1)+'" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet'+(j+1)+'.xml"/>';
+  wr+='<Relationship Id="rId'+(wb.SheetNames.length+1)+'" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>'
+    +'<Relationship Id="rId'+(wb.SheetNames.length+2)+'" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings" Target="sharedStrings.xml"/>'
+    +'</Relationships>';
+  files["xl/_rels/workbook.xml.rels"] = strBytes(wr);
+
+  // xl/workbook.xml
+  var wbx='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+    +'<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
+    +'<sheets>';
+  for(var k=0;k<wb.SheetNames.length;k++)
+    wbx+='<sheet name="'+escXML(wb.SheetNames[k])+'" sheetId="'+(k+1)+'" r:id="rId'+(k+1)+'"/>';
+  wbx+='</sheets></workbook>';
+  files["xl/workbook.xml"] = strBytes(wbx);
+
+  // xl/styles.xml
+  files["xl/styles.xml"] = strBytes(
+    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+    +'<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
+    +'<fonts count="1"><font><sz val="11"/><name val="Calibri"/></font></fonts>'
+    +'<fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill></fills>'
+    +'<borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders>'
+    +'<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>'
+    +'<cellXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/></cellXfs>'
+    +'</styleSheet>');
+
+  // Build shared strings table + worksheets
+  var ss=[],sm={};
+  function getSI(str){
+    if(sm[str]!==undefined) return sm[str];
+    var idx=ss.length; ss.push(str); sm[str]=idx; return idx;
+  }
+
+  for(var si=0;si<wb.SheetNames.length;si++){
+    var ws  = wb.Sheets[wb.SheetNames[si]];
+    var mg  = ws["!merges"]||[];
+    var cols= ws["!cols"]||[];
+    var rng = decodeRange(ws["!ref"]||"A1");
+
+    var wx='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      +'<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">';
+
+    if(cols.length){
+      wx+='<cols>';
+      for(var ci=0;ci<cols.length;ci++){
+        if(cols[ci]&&cols[ci].wch)
+          wx+='<col min="'+(ci+1)+'" max="'+(ci+1)+'" width="'+cols[ci].wch+'" customWidth="1"/>';
+      }
+      wx+='</cols>';
+    }
+
+    wx+='<sheetData>';
+    for(var R=rng.s.r;R<=rng.e.r;R++){
+      wx+='<row r="'+(R+1)+'">';
+      for(var C=rng.s.c;C<=rng.e.c;C++){
+        var addr=encodeCell({r:R,c:C}),cell=ws[addr];
+        if(!cell){ wx+='<c r="'+addr+'"/>'; continue; }
+        if(cell.t==="n")
+          wx+='<c r="'+addr+'" t="n"><v>'+cell.v+'</v></c>';
+        else if(cell.t==="b")
+          wx+='<c r="'+addr+'" t="b"><v>'+(cell.v?1:0)+'</v></c>';
+        else{
+          var si2=getSI(String(cell.v));
+          wx+='<c r="'+addr+'" t="s"><v>'+si2+'</v></c>';
+        }
+      }
+      wx+='</row>';
+    }
+    wx+='</sheetData>';
+
+    if(mg.length){
+      wx+='<mergeCells count="'+mg.length+'">';
+      for(var mi=0;mi<mg.length;mi++)
+        wx+='<mergeCell ref="'+encodeRange(mg[mi].s,mg[mi].e)+'"/>';
+      wx+='</mergeCells>';
+    }
+
+    wx+='</worksheet>';
+    files["xl/worksheets/sheet"+(si+1)+".xml"] = strBytes(wx);
+  }
+
+  // xl/sharedStrings.xml
+  var ssXML='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+    +'<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="'+ss.length+'" uniqueCount="'+ss.length+'">';
+  for(var xi=0;xi<ss.length;xi++)
+    ssXML+='<si><t xml:space="preserve">'+escXML(ss[xi])+'</t></si>';
+  ssXML+='</sst>';
+  files["xl/sharedStrings.xml"] = strBytes(ssXML);
+
+  return zipU8(files);
+}
+
+// ── ZIP builder — fully Uint8Array native ─────────────────
+function zipU8(files){
+  var localParts  = [];   // Uint8Array chunks for local file headers
+  var centralParts= [];   // Uint8Array chunks for central directory
+  var offsets     = [];   // byte offset of each local header
+  var totalLocal  = 0;
+
+  Object.keys(files).forEach(function(name){
+    var data    = files[name];           // Uint8Array
+    var nameU8  = strBytes(name);
+    var crc     = crc32(data);
+    var sz      = data.length;
+    var nl      = nameU8.length;
+
+    offsets.push(totalLocal);
+
+    // Local file header
+    var lh = concat(
+      new Uint8Array([0x50,0x4B,0x03,0x04]),  // signature
+      u16b(20), u16b(0), u16b(0),              // version, flags, method=stored
+      u16b(0),  u16b(0),                       // mod time, mod date
+      u32b(crc), u32b(sz), u32b(sz),           // crc, compressed, uncompressed
+      u16b(nl), u16b(0),                       // filename len, extra len
+      nameU8,                                  // filename
+      data                                     // file data
+    );
+    localParts.push(lh);
+    totalLocal += lh.length;
+
+    // Central directory entry
+    var cd = concat(
+      new Uint8Array([0x50,0x4B,0x01,0x02]),  // signature
+      u16b(20), u16b(20),                     // version made, version needed
+      u16b(0),  u16b(0),  u16b(0),            // flags, method=stored, mod time
+      u16b(0),                                // mod date
+      u32b(crc), u32b(sz), u32b(sz),
+      u16b(nl), u16b(0), u16b(0),             // fn len, extra len, comment len
+      u16b(0),  u16b(0),                      // disk start, internal attr
+      u32b(0),                                // external attr
+      u32b(offsets[offsets.length-1]),         // offset of local header
+      nameU8
+    );
+    centralParts.push(cd);
+  });
+
+  var centralData = concat.apply(null, centralParts);
+  var numFiles    = localParts.length;
+
+  // End of central directory record
+  var eocd = concat(
+    new Uint8Array([0x50,0x4B,0x05,0x06]),
+    u16b(0), u16b(0),
+    u16b(numFiles), u16b(numFiles),
+    u32b(centralData.length),
+    u32b(totalLocal),
+    u16b(0)
+  );
+
+  var allLocal = concat.apply(null, localParts);
+  return concat(allLocal, centralData, eocd);
+}
+
+g.XLSX = XLSX;
+})(window);
+</script>
 
 <script>
 // ════════════════════════════════════════
@@ -888,6 +1411,14 @@ function updateFilterGolongan() {
   const cabang = document.getElementById('filterCabang').value;
   const golonganList = GOLONGAN_MAP[cabang] || [];
   populateSelect('filterGolongan', golonganList, 'Semua Golongan');
+  updateFilterBidang();
+}
+
+function updateFilterBidang() {
+  const cabang = document.getElementById('filterCabang').value;
+  const golongan = document.getElementById('filterGolongan').value;
+  const bidangList = (BIDANG_MAP[cabang] || {})[golongan] || [];
+  populateSelect('filterBidangRekap', bidangList, 'Semua Bidang');
 }
 
 function updateFilterGolonganAkhir() {
@@ -900,7 +1431,7 @@ function tambahNilai() {
   const noPeserta = document.getElementById('noPeserta').value.trim();
   const cabang    = document.getElementById('cabang').value;
   const golongan  = document.getElementById('golongan').value;
-  const hakim     = document.getElementById('namaHakim').value.trim();
+  const hakim     = document.getElementById('namaHakim').value;
   const bidang    = document.getElementById('bidangPenilaian').value;
   const nilai     = parseFloat(document.getElementById('nilaiInput').value);
 
@@ -913,14 +1444,82 @@ function tambahNilai() {
     return;
   }
 
+  // ── MODE EDIT BARIS INPUT ──
+  if (editInputIndex >= 0) {
+    inputRows[editInputIndex] = { noPeserta, cabang, golongan, hakim, bidang, nilai };
+    renderInputTable();
+    document.getElementById('nilaiInput').value = '';
+    document.getElementById('namaHakim').value = '';
+    setEditInputMode(false);
+    showToast('✅ Data berhasil diperbarui!');
+    return;
+  }
+
+  // Cek duplikat: hakim yang sama untuk peserta+cabang+golongan+bidang yang sama
+  const duplikat = inputRows.find(r =>
+    r.noPeserta === noPeserta && r.cabang === cabang &&
+    r.golongan === golongan && r.bidang === bidang && r.hakim === hakim
+  );
+  if (duplikat) {
+    showToast(`⚠ ${hakim} sudah diinput untuk bidang ${bidang}!`);
+    return;
+  }
+
   inputRows.push({ noPeserta, cabang, golongan, hakim, bidang, nilai });
   renderInputTable();
   document.getElementById('nilaiInput').value = '';
+  document.getElementById('namaHakim').value = '';
   showToast('✅ Nilai berhasil ditambahkan!');
 }
 
 function hapusInputRow(idx) {
   inputRows.splice(idx, 1);
+  if (editInputIndex === idx) {
+    setEditInputMode(false);
+  } else if (editInputIndex > idx) {
+    editInputIndex--;
+  }
+  renderInputTable();
+}
+
+function editInputRow(idx) {
+  const r = inputRows[idx];
+  if (!r) return;
+
+  document.getElementById('noPeserta').value = r.noPeserta;
+
+  const cabangEl = document.getElementById('cabang');
+  cabangEl.value = r.cabang;
+  updateGolongan();
+
+  const golonganEl = document.getElementById('golongan');
+  golonganEl.value = r.golongan;
+  updateBidang();
+
+  const bidangEl = document.getElementById('bidangPenilaian');
+  bidangEl.value = r.bidang;
+
+  document.getElementById('namaHakim').value = r.hakim;
+  document.getElementById('nilaiInput').value = r.nilai;
+
+  setEditInputMode(true, idx);
+  showToast(`✏️ Edit baris #${idx + 1}. Ubah data lalu klik "Simpan Perubahan".`);
+}
+
+function setEditInputMode(active, idx) {
+  editInputIndex = active ? idx : -1;
+  const btnTambah = document.querySelector('.btn-actions .btn-primary');
+  const formCard = document.getElementById('input-form-card');
+
+  if (active) {
+    btnTambah.innerHTML = '💾 Simpan Perubahan';
+    btnTambah.style.background = 'linear-gradient(135deg, #1565C0, #1976D2)';
+    formCard.classList.add('edit-mode-active');
+  } else {
+    btnTambah.innerHTML = '➕ Tambah Nilai';
+    btnTambah.style.background = '';
+    formCard.classList.remove('edit-mode-active');
+  }
   renderInputTable();
 }
 
@@ -932,11 +1531,12 @@ function resetForm() {
   document.getElementById('namaHakim').value = '';
   document.getElementById('nilaiInput').value = '';
   inputRows = [];
+  setEditInputMode(false);
   renderInputTable();
 }
 
 function konfirmasiResetForm() {
-  if (!inputRows.length) {
+  if (!inputRows.length && !editMode && editInputIndex < 0) {
     showToast('ℹ️ Form sudah kosong.');
     return;
   }
@@ -945,6 +1545,7 @@ function konfirmasiResetForm() {
     'Apakah Anda yakin ingin menghapus semua data di form input? Data yang belum disimpan akan hilang.',
     function() {
       resetForm();
+      if (editMode) setEditMode(false);
       showToast('✅ Form berhasil direset!');
     }
   );
@@ -976,7 +1577,7 @@ function renderInputTable() {
     return;
   }
   tbody.innerHTML = inputRows.map((r, i) => `
-    <tr>
+    <tr style="${editInputIndex === i ? 'background:rgba(21,101,192,0.08);' : ''}">
       <td>${i+1}</td>
       <td><strong>${r.noPeserta}</strong></td>
       <td>${r.cabang}</td>
@@ -984,23 +1585,169 @@ function renderInputTable() {
       <td class="bidang-name">${r.bidang}</td>
       <td>${r.hakim}</td>
       <td><strong style="color:var(--orange-deep)">${r.nilai}</strong></td>
-      <td><button class="btn btn-danger" style="padding:4px 10px;font-size:0.78rem" onclick="hapusInputRow(${i})">✕</button></td>
+      <td>
+        <div class="rekap-action-cell">
+          <button class="rekap-action-btn edit-btn" style="${editInputIndex === i ? 'opacity:0.5;pointer-events:none;' : ''}" onclick="editInputRow(${i})" title="Edit baris ini">✏️ Edit</button>
+          <button class="rekap-action-btn hapus-btn" onclick="hapusInputRow(${i})" title="Hapus baris ini">🗑 Hapus</button>
+        </div>
+      </td>
     </tr>
   `).join('');
 }
 
 // ════════════════════════════════════════
-//   SAVE TO REKAP
+//   EDIT MODE STATE
+// ════════════════════════════════════════
+let editMode = false;           // apakah sedang mode edit (untuk rekap)
+let editKey = null;             // key unik baris yang diedit
+let editInputIndex = -1;        // index baris di inputRows yang sedang diedit (-1 = tidak edit)
+
+// ════════════════════════════════════════
+//   SAVE TO REKAP (tambah / update)
 // ════════════════════════════════════════
 function simpanKeRekap() {
   if (!inputRows.length) { showToast('⚠ Tidak ada data untuk disimpan!'); return; }
-  rekapData = rekapData.concat(inputRows.map(r => ({...r})));
-  saveToStorage();
+
+  if (editMode && editKey) {
+    // ── MODE EDIT: hapus semua baris lama yg cocok dengan editKey, lalu sisipkan yg baru ──
+    const [editNo, editCabang, editGolongan, editBidang] = editKey.split('||');
+    rekapData = rekapData.filter(r =>
+      !(r.noPeserta === editNo && r.cabang === editCabang &&
+        r.golongan === editGolongan && r.bidang === editBidang)
+    );
+    rekapData = rekapData.concat(inputRows.map(r => ({...r})));
+    saveToStorage();
+    inputRows = [];
+    setEditMode(false);
+    renderInputTable();
+    renderRekap();
+    renderRekapAkhir();
+    showToast('✅ Data berhasil diperbarui!');
+  } else {
+    // ── MODE TAMBAH BIASA ──
+    rekapData = rekapData.concat(inputRows.map(r => ({...r})));
+    saveToStorage();
+    inputRows = [];
+    renderInputTable();
+    renderRekap();
+    renderRekapAkhir();
+    showToast('💾 Data berhasil disimpan ke rekapitulasi!');
+  }
+}
+
+// ════════════════════════════════════════
+//   EDIT BARIS REKAP
+// ════════════════════════════════════════
+function editRekap(noPeserta, cabang, golongan, bidang) {
+  // Kumpulkan semua baris raw dari rekapData yang cocok
+  const barisAsli = rekapData.filter(r =>
+    r.noPeserta === noPeserta && r.cabang === cabang &&
+    r.golongan === golongan && r.bidang === bidang
+  );
+
+  if (!barisAsli.length) {
+    showToast('⚠ Data tidak ditemukan!');
+    return;
+  }
+
+  // Simpan key edit
+  editKey = `${noPeserta}||${cabang}||${golongan}||${bidang}`;
+
+  // Isi form
+  document.getElementById('noPeserta').value = noPeserta;
+
+  const cabangEl = document.getElementById('cabang');
+  cabangEl.value = cabang;
+  updateGolongan();
+
+  const golonganEl = document.getElementById('golongan');
+  golonganEl.value = golongan;
+  updateBidang();
+
+  const bidangEl = document.getElementById('bidangPenilaian');
+  bidangEl.value = bidang;
+
+  // Isi inputRows dengan semua hakim yang ada
+  inputRows = barisAsli.map(r => ({
+    noPeserta: r.noPeserta,
+    cabang: r.cabang,
+    golongan: r.golongan,
+    bidang: r.bidang,
+    hakim: r.hakim,
+    nilai: r.nilai
+  }));
+
+  renderInputTable();
+  setEditMode(true, noPeserta, cabang, golongan, bidang);
+
+  // Pindah ke tab input
+  switchTab('input', document.querySelector('.tab-btn'));
+  showToast('✏️ Data dimuat untuk diedit. Ubah dan simpan kembali.');
+}
+
+// ════════════════════════════════════════
+//   HAPUS BARIS REKAP
+// ════════════════════════════════════════
+function hapusRekap(noPeserta, cabang, golongan, bidang) {
+  showModal(
+    '🗑️ Konfirmasi Hapus',
+    `Hapus data peserta No. ${noPeserta} — ${cabang} / ${golongan} / ${bidang}? Tindakan ini tidak bisa dibatalkan.`,
+    function() {
+      rekapData = rekapData.filter(r =>
+        !(r.noPeserta === noPeserta && r.cabang === cabang &&
+          r.golongan === golongan && r.bidang === bidang)
+      );
+      saveToStorage();
+      renderRekap();
+      renderRekapAkhir();
+      showToast('✅ Data berhasil dihapus!');
+    }
+  );
+}
+
+// ════════════════════════════════════════
+//   BATAL EDIT
+// ════════════════════════════════════════
+function batalEdit() {
   inputRows = [];
   renderInputTable();
-  renderRekap();
-  renderRekapAkhir();
-  showToast('💾 Data berhasil disimpan ke rekapitulasi!');
+  setEditMode(false);
+  showToast('↩ Mode edit dibatalkan.');
+}
+
+// ════════════════════════════════════════
+//   SET EDIT MODE UI
+// ════════════════════════════════════════
+function setEditMode(active, noPeserta, cabang, golongan, bidang) {
+  editMode = active;
+  const banner = document.getElementById('edit-mode-banner');
+  const formCard = document.getElementById('input-form-card');
+  const btnSimpan = document.getElementById('btn-simpan-rekap');
+
+  if (active) {
+    editKey = `${noPeserta}||${cabang}||${golongan}||${bidang}`;
+    banner.classList.add('active');
+    document.getElementById('edit-banner-title').textContent =
+      `✏️ Mode Edit: No. ${noPeserta} — ${cabang} / ${golongan} / ${bidang}`;
+    document.getElementById('edit-banner-desc').textContent =
+      'Ubah atau tambah data hakim di tabel bawah, lalu klik "Simpan Perubahan".';
+    formCard.classList.add('edit-mode-active');
+    btnSimpan.textContent = '💾 Simpan Perubahan';
+    btnSimpan.style.background = 'linear-gradient(135deg, #1565C0, #1976D2)';
+  } else {
+    editKey = null;
+    banner.classList.remove('active');
+    formCard.classList.remove('edit-mode-active');
+    btnSimpan.innerHTML = '💾 Simpan &amp; Rekap Nilai';
+    btnSimpan.style.background = '';
+    // Reset form fields
+    document.getElementById('noPeserta').value = '';
+    document.getElementById('cabang').value = '';
+    populateSelect('golongan', [], '-- Pilih Golongan --');
+    populateSelect('bidangPenilaian', [], '-- Pilih Bidang --');
+    document.getElementById('namaHakim').value = '';
+    document.getElementById('nilaiInput').value = '';
+  }
 }
 
 // ════════════════════════════════════════
@@ -1072,8 +1819,11 @@ function getCombinedData(filterCabang, filterGolongan, filterNomor) {
 function getFilteredRekap() {
   const fc = document.getElementById('filterCabang').value;
   const fg = document.getElementById('filterGolongan').value;
+  const fb = document.getElementById('filterBidangRekap').value;
   const fn = document.getElementById('filterNomorRekap').value;
-  return getCombinedData(fc, fg, fn);
+  let data = getCombinedData(fc, fg, fn);
+  if (fb) data = data.filter(r => r.bidang === fb);
+  return data;
 }
 
 function renderRekap() {
@@ -1110,6 +1860,7 @@ function renderRekap() {
         <th rowspan="2">Jumlah Hakim</th>
         <th colspan="2">Nilai</th>
         <th rowspan="2">Peringkat${nomorLabel}</th>
+        <th rowspan="2">Aksi</th>
       </tr>
       <tr>
         <th>Individu</th>
@@ -1141,6 +1892,12 @@ function renderRekap() {
           <td style="font-size:0.75rem;text-align:left;">${nilaiIndividu}</td>
           <td class="gabungan-cell">${r.nilaiGabungan}</td>
           <td>${rankBadge}</td>
+          <td>
+            <div class="rekap-action-cell">
+              <button class="rekap-action-btn edit-btn" onclick='editRekap(${JSON.stringify(r.noPeserta)},${JSON.stringify(r.cabang)},${JSON.stringify(r.golongan)},${JSON.stringify(r.bidang)})'>✏️ Edit</button>
+              <button class="rekap-action-btn hapus-btn" onclick='hapusRekap(${JSON.stringify(r.noPeserta)},${JSON.stringify(r.cabang)},${JSON.stringify(r.golongan)},${JSON.stringify(r.bidang)})'>🗑 Hapus</button>
+            </div>
+          </td>
         </tr>`;
     });
   });
@@ -1401,7 +2158,17 @@ function switchTab(tab, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById(`tab-${tab}`).classList.add('active');
-  if (btn) btn.classList.add('active');
+  // btn bisa berupa element atau null
+  if (btn && btn.classList) {
+    btn.classList.add('active');
+  } else {
+    // Cari tab-btn yang sesuai
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      if (b.getAttribute('onclick') && b.getAttribute('onclick').includes(`'${tab}'`)) {
+        b.classList.add('active');
+      }
+    });
+  }
   if (tab === 'rekap') renderRekap();
   if (tab === 'rekap-akhir') renderRekapAkhir();
 }
@@ -1417,9 +2184,91 @@ function showToast(msg) {
 }
 
 // ════════════════════════════════════════
+//   IMPORT EXCEL - REKAP GABUNGAN
+// ════════════════════════════════════════
+
+// ════════════════════════════════════════
+//   LOGO UPLOAD — offline, localStorage
+// ════════════════════════════════════════
+const LOGO_KEY_1 = 'mtq_logo_kiri';
+const LOGO_KEY_2 = 'mtq_logo_kanan';
+
+const DEFAULT_SVG_1 = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:76px;height:76px">
+  <circle cx="50" cy="50" r="46" fill="#fff4e0" stroke="#D4A017" stroke-width="3"/>
+  <polygon points="50,10 58,36 86,36 63,53 71,79 50,63 29,79 37,53 14,36 42,36" fill="#E07820" opacity="0.85"/>
+  <circle cx="50" cy="50" r="18" fill="none" stroke="#D4A017" stroke-width="2.5"/>
+  <text x="50" y="54" text-anchor="middle" font-size="9" font-family="Arial" fill="#1A0E00" font-weight="bold">LPTQ</text>
+  <text x="50" y="88" text-anchor="middle" font-size="7" font-family="Arial" fill="#C45C0A">MTQ XII 2026</text>
+</svg>`;
+
+const DEFAULT_SVG_2 = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:76px;height:76px">
+  <circle cx="50" cy="50" r="46" fill="#fff4e0" stroke="#C45C0A" stroke-width="3"/>
+  <path d="M50 14 L72 24 L72 56 Q72 74 50 84 Q28 74 28 56 L28 24 Z" fill="#E07820" stroke="#D4A017" stroke-width="1.5"/>
+  <path d="M50 20 L66 28 L66 54 Q66 68 50 78 Q34 68 34 54 L34 28 Z" fill="#FDE8C8"/>
+  <path d="M34 55 Q42 50 50 55 Q58 60 66 55" stroke="#1565C0" stroke-width="2.5" fill="none"/>
+  <path d="M34 62 Q42 57 50 62 Q58 67 66 62" stroke="#1565C0" stroke-width="2" fill="none"/>
+  <polygon points="50,25 52,32 59,32 53,37 56,44 50,40 44,44 47,37 41,32 48,32" fill="#D4A017"/>
+  <text x="50" y="90" text-anchor="middle" font-size="6" font-family="Arial" fill="#C45C0A" font-weight="bold">KAB. SBT</text>
+</svg>`;
+
+function triggerLogoUpload(slot) {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.onchange = function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 2 * 1024 * 1024) {
+      showToast('⚠ Ukuran gambar maks. 2MB. Coba kompres terlebih dahulu.');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      const dataUrl = ev.target.result;
+      applyLogo(slot, dataUrl);
+      try {
+        localStorage.setItem(slot === 1 ? LOGO_KEY_1 : LOGO_KEY_2, dataUrl);
+        showToast(`✅ Logo ${slot === 1 ? 'kiri' : 'kanan'} berhasil dipasang & disimpan!`);
+      } catch(err) {
+        showToast('⚠ Logo terpasang tapi gagal disimpan. Coba gambar lebih kecil.');
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+  input.click();
+}
+
+function applyLogo(slot, dataUrl) {
+  const content = document.getElementById('logoContent' + slot);
+  const box = document.getElementById('logoBox' + slot);
+  content.innerHTML = `<img src="${dataUrl}" style="width:86px;height:86px;object-fit:contain;border-radius:50%;" alt="Logo ${slot}">`;
+  box.classList.add('has-logo');
+}
+
+function removeLogo(event, slot) {
+  event.stopPropagation();
+  const box = document.getElementById('logoBox' + slot);
+  const content = document.getElementById('logoContent' + slot);
+  content.innerHTML = slot === 1 ? DEFAULT_SVG_1 : DEFAULT_SVG_2;
+  box.classList.remove('has-logo');
+  try { localStorage.removeItem(slot === 1 ? LOGO_KEY_1 : LOGO_KEY_2); } catch(e) {}
+  showToast(`🗑 Logo ${slot === 1 ? 'kiri' : 'kanan'} dikembalikan ke default.`);
+}
+
+function loadLogos() {
+  try {
+    const l1 = localStorage.getItem(LOGO_KEY_1);
+    const l2 = localStorage.getItem(LOGO_KEY_2);
+    if (l1) applyLogo(1, l1);
+    if (l2) applyLogo(2, l2);
+  } catch(e) {}
+}
+
+// ════════════════════════════════════════
 //   INITIALIZE
 // ════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', function() {
+  loadLogos();
   if (loadFromStorage()) {
     renderRekap();
     renderRekapAkhir();
